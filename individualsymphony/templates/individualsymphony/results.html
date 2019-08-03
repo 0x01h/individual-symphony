@@ -1,0 +1,803 @@
+{% extends "individualsymphony/base.html" %}
+{% load i18n %}
+{% block ext-js %}
+<link href="/static/css/circular-prog-bar.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.js" integrity="sha256-rjYnB0Bull7k2XkbJ03UNGqMuMieR769uQVGSSlsi6A=" crossorigin="anonymous"></script>
+{% endblock %}
+{% block script %}
+var loadMoreCounter = 0;
+function getCookie(name) {
+  var cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+      var cookies = document.cookie.split(';');
+      for (var i = 0; i < cookies.length; i++) {
+          var cookie = jQuery.trim(cookies[i]);
+          // Does this cookie string begin with the name we want?
+          if (cookie.substring(0, name.length + 1) === (name + '=')) {
+              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+              break;
+          }
+      }
+  }
+  return cookieValue;
+}
+
+function toastMessage(message, color='red lighten-1', duration=1250) {
+    M.toast({html: message, displayLength: duration, classes: color});
+}
+
+$(document).ready(function(){
+    $('select').formSelect();
+    $('.collapsible').collapsible();
+    $('.modal').modal();
+
+    $(window).on('load', function() {
+        $('.page-preloader').fadeOut('slow');
+        $('.content').fadeIn('slow');
+    });
+
+    setTimeout(function(){
+        $('.page-preloader').fadeOut('slow');
+        $('.content').fadeIn('slow');
+    }, 5000);
+
+    $('.embedButton').click(function() {
+        if (!$(this).hasClass('feedbackSent')) {
+            $(this).addClass('feedbackSent');
+            beforeText = '{% trans "Sending... 🔥" %}';
+            lastState = 'sending';
+            requestType = 'POST';
+            if (!$(this).hasClass('feedbackUndo')) {
+                $(this).addClass('feedbackUndo');
+                afterText = '{% trans "Sent! 👍 Undo?" %}';
+                afterDisableButton = false;
+                lastState = 'sent';
+            }
+            else {
+                afterText = '{% trans "Sent! 👍" %}';
+                afterDisableButton = true;
+                lastState = 'last_sent';
+            }
+        }
+        else {
+            $(this).removeClass('feedbackSent');
+            beforeText = '{% trans "Reverting... 🔥" %}';
+            afterText = '{% trans "Sent! 👍" %}';
+            requestType = 'PATCH';
+            afterDisableButton = false;
+            lastState = 'reverted';
+        }
+
+        var csrftoken = getCookie('csrftoken');
+        selectedButton = $(this);
+        combinedId = selectedButton.attr('id');
+        recommendation_id = combinedId.split('-')[0];
+        track_num = combinedId.split('-')[1];
+        data = "recommendation_id=" + recommendation_id + "&num=" + track_num;
+        selectedButton.attr('disabled', true);
+        selectedButton.text(beforeText);
+    
+    $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }
+    })
+    
+    $.ajax({
+         type: requestType,
+         url: "/feedback",
+         data: data,
+         success: function(response) {
+          selectedButton.attr('disabled', afterDisableButton);
+          if (lastState == 'sent') {
+            toastMessage('{% trans "Thank you for your feedback! 💟" %}');
+            selectedButton.text(afterText);
+          }
+          else if (lastState == 'last_sent') {
+            toastMessage('{% trans "Thank you for your feedback! 💟" %}');
+            selectedButton.text(afterText);
+            selectedButton.fadeOut('slow')
+          }
+          else {
+            toastMessage('{% trans "Feedback is successfully reverted! 🔥" %}');
+            selectedButton.html('<i style="font-size: 0.75rem" class="material-icons left">sentiment_very_dissatisfied</i>{% trans "dissatisfied" %}');
+          }
+         },
+         error: function(response) {
+            selectedButton.fadeOut('slow');
+            code = response.status;
+            if (code == 400) {
+                toastMessage('{% trans "An error occured! Your session could be expired, try more suggestions button to refresh your session." as error_mes %}{{ error_mes }}', 'black', 5000);
+            }
+            else {
+                toastMessage('{% trans "An error occured! Status code:" as error_mes %}{{ error_mes }} ' + String(code), 'black', 5000);
+        }
+        }
+       });
+      });
+
+  $('#genreSuggestionButton').click(function(event) {
+    event.preventDefault();
+    selectedDiv = $('#genreSuggestionDiv');
+    if (!$(this).hasClass('genreSuggestionsSent')) {
+        $(this).addClass('genreSuggestionsSent');
+        selectedDiv.hide(1000);
+        beforeText = '{% trans "Sending... 🔥" %}';
+        lastState = 'sending';
+        requestType = 'POST';
+        if (!$(this).hasClass('genreSuggestionsUndo')) {
+            $(this).addClass('genreSuggestionsUndo');
+            afterText = '{% trans "Sent! 👍 Undo?" %}';
+            afterDisableButton = false;
+        }
+        else {
+            afterText = '{% trans "Sent! 👍" %}';
+            afterDisableButton = true;
+            $(this).fadeOut('slow');
+        }
+    }
+    else {
+        lastState = 'reverting';
+        $(this).removeClass('genreSuggestionsSent');
+        selectedDiv.show(1000);
+        beforeText = '{% trans "Reverting... 🔥" %}';
+        afterText = '{% trans "Send again?" %}';
+        requestType = 'DELETE';
+        afterDisableButton = false;
+    }
+    var csrftoken = getCookie('csrftoken');
+    selectedButton = $(this);
+    selectedButton.attr('disabled', true);
+    selectedButton.text(beforeText);
+
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+})
+
+$.ajax({
+     type: requestType,
+     url: "/feedback",
+     data: $('#genreSuggestionForm').serializeArray(),
+     success: function(response) {
+       selectedButton.attr('disabled', afterDisableButton);
+       if (lastState == 'reverting') {
+        selectedButton.html('<i style="font-size: 3.5rem" class="large material-icons">subdirectory_arrow_right</i>');
+        toastMessage('{% trans "Genre suggestions are successfully reverted! 🔥" %}');
+       }
+       else {
+       selectedButton.text(afterText);
+       toastMessage('{% trans "Thank you for your genre suggestions! 💟" %}');
+    }
+   },
+    error: function(response) {
+        selectedButton.fadeOut('slow');
+        code = response.status;
+        if (code == 400) {
+            toastMessage('{% trans "An error occured! Your session could be expired, try more suggestions button to refresh your session." as error_mes %}{{ error_mes }}', 'black', 5000);
+        }
+        else {
+            toastMessage('{{ error_mes }} ' + String(code), 'black', 5000);
+    }
+    }
+   });
+  });
+
+  $('#loadMoreButton').click(function(event) {
+    loadMoreCounter++;
+    event.preventDefault();
+    var csrftoken = getCookie('csrftoken');
+    $('#loadMoreButton').hide();
+    $('#preloader').show();
+    $("html, body").animate({ scrollTop: $('#recommendedSongs').offset().top }, 1000);
+
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+})
+
+$.ajax({
+     type: "POST",
+     url: "/evaluate",
+     data: $('#load-more-form').serializeArray(),
+     success: function(response) {
+        songNames = [];
+        songIds = [];
+        r_b_vals = [];
+        rap_vals = [];
+        electronic_vals = [];
+        rock_vals = [];
+        new_age_vals = [];
+        classical_vals = [];
+        reggae_vals = [];
+        blues_vals = [];
+        country_vals = [];
+        world_vals = [];
+        folk_vals = [];
+        easy_listening_vals = [];
+        jazz_vals = [];
+        vocal_vals = [];
+        punk_vals = [];
+        alternative_vals = [];
+        pop_vals = [];
+        heavy_metal_vals = [];
+        rr_id = response['recommendation_id'];
+        total_nums = response['data'].length;
+        i = 1;
+        x = 0;
+        $.each(response['data'], function(key, value) {
+            songIds.push(value[0]);
+            songNames.push(value[1]);
+            r_b_vals.push(value[2]);
+            rap_vals.push(value[3]);
+            electronic_vals.push(value[4]);
+            rock_vals.push(value[5]);
+            new_age_vals.push(value[6]);
+            classical_vals.push(value[7]);
+            reggae_vals.push(value[8]);
+            blues_vals.push(value[9]);
+            country_vals.push(value[10]);
+            world_vals.push(value[11]);
+            folk_vals.push(value[12]);
+            easy_listening_vals.push(value[13]);
+            jazz_vals.push(value[14]);
+            vocal_vals.push(value[15]);
+            punk_vals.push(value[16]);
+            alternative_vals.push(value[17]);
+            pop_vals.push(value[18]);
+            heavy_metal_vals.push(value[19]);
+          });
+        $('[id=spotifyEmbed]').each(function() {
+            $(this).attr('src', 'https://open.spotify.com/embed/track/' + String(songIds[x++]));
+         });
+        x = 0;
+        $('a.songGenreSuggestionButton').each(function() {
+            $(this).attr('id', String(songIds[x++]));
+        });
+        x = 0;
+        $('div.modal').each(function() {
+            $(this).attr('id', 'songGenreModal_' + String(songIds[x++]));
+        });
+        x = 0;
+        $('[id=info_button]').each(function() {
+            $(this).attr('href', '#songGenreModal_' + String(songIds[x++]));
+         });
+        x = 0;
+        $("div[id*='songGenreSuggestionCard']").each(function() {
+            $(this).attr('id', 'songGenreSuggestionCard_' + String(songIds[x++]));
+            $(this).show();
+        });
+        x = 0;
+        $("select[id*='songGenreSuggestion_']").each(function() {
+            $(this).attr('id', 'songGenreSuggestion_' + String(songIds[x++]));
+        });
+        for (let i = 0; i < 10; i++) {
+            mainGenreSuggestions[i].data.datasets[0].data[0] = r_b_vals[0];
+            mainGenreSuggestions[i].data.datasets[0].data[1] = rap_vals[0];
+            mainGenreSuggestions[i].data.datasets[0].data[2] = electronic_vals[0];
+            mainGenreSuggestions[i].data.datasets[0].data[3] = rock_vals[0];
+            mainGenreSuggestions[i].data.datasets[0].data[4] = new_age_vals[0];
+            mainGenreSuggestions[i].data.datasets[0].data[5] = classical_vals[0];
+            mainGenreSuggestions[i].data.datasets[0].data[6] = reggae_vals[0];
+            mainGenreSuggestions[i].data.datasets[0].data[7] = blues_vals[0];
+            mainGenreSuggestions[i].data.datasets[0].data[8] = country_vals[0];
+            mainGenreSuggestions[i].data.datasets[0].data[9] = world_vals[0];
+            mainGenreSuggestions[i].data.datasets[0].data[10] = folk_vals[0];
+            mainGenreSuggestions[i].data.datasets[0].data[11] = easy_listening_vals[0];
+            mainGenreSuggestions[i].data.datasets[0].data[12] = jazz_vals[0];
+            mainGenreSuggestions[i].data.datasets[0].data[13] = vocal_vals[0];
+            mainGenreSuggestions[i].data.datasets[0].data[14] = punk_vals[0];
+            mainGenreSuggestions[i].data.datasets[0].data[15] = alternative_vals[0];
+            mainGenreSuggestions[i].data.datasets[0].data[16] = pop_vals[0];
+            mainGenreSuggestions[i].data.datasets[0].data[17] = heavy_metal_vals[0];
+    }
+         $('a.embedButton').each(function() {
+            $(this).attr('id', rr_id + '-' + String(i++));
+            $(this).removeClass('feedbackSent');
+            $(this).removeClass('feedbackUndo');
+            $(this).html('<i style="font-size: 0.75rem" class="material-icons left">sentiment_very_dissatisfied</i>{% trans "dissatisfied" %}');
+            $(this).attr('disabled', false);
+            $(this).show();
+         });
+         $('#gsRecommendationId').attr('value', rr_id);
+         $('#loadMoreButton').show();
+         $('#preloader').hide();
+     },
+     error: function(response) {
+        $(this).fadeOut('slow');
+        code = response.status;
+        toastMessage('{{ error_mes }} ' + String(code), 'black', 5000);
+    },
+    complete: function(response) {
+        if (loadMoreCounter == 9) {
+            toastMessage('{% trans "Your suggestions have been finished, thank you! Return to home page and try again for more. 🤖" %}', color='black', duration=4500);
+            $('#loadMoreButton').fadeOut('slow');
+            return;
+        }
+    }
+   });
+  });
+
+  $('.songGenreSuggestionButton').click(function(event) {
+    event.preventDefault();
+    var csrftoken = getCookie('csrftoken');
+    selectedButton = $(this);
+    songId = String(selectedButton.attr('id'));
+    formId = 'songGenreSuggestion_' + songId;
+    selectionCard = $('#' + 'songGenreSuggestionCard_' + songId);
+    selectionForm = $('#' + formId);
+    genre = String(selectionForm[0].value)
+    if (genre == ''){
+        toastMessage('{% trans "Please select a genre! 💩" as null_genre %}{{ null_genre }}', 'black', 5000);
+        return;
+    }
+    data = "genre=" + genre + "&song_id=" + songId;
+
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+})
+
+$.ajax({
+     type: "POST",
+     url: "/song_genre_suggestion",
+     data: data,
+     success: function(response) {
+        selectionCard.fadeOut('slow');
+        toastMessage('{% trans "Thank you for your feedback! 💟" %}');
+     },
+     error: function(response) {
+        selectionCard.fadeOut('slow');
+        code = response.status;
+        toastMessage('{% trans "An error occured! Status code:" as error_mes %}{{ error_mes }} ' + String(code), 'black', 5000);
+    }
+   });
+  });
+});
+{% endblock %}
+{% block custom-css %}
+.progress-circle {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: 10;
+}
+
+#genre-suggestion-input::-webkit-slider-thumb {
+    background-color: #42a5f5
+}
+
+#genre-suggestion-input::-moz-range-thumb {
+    background-color: #42a5f5
+}
+
+#genre-suggestion-input::-ms-thumb {
+    background-color: #42a5f5
+}
+  
+#genre-suggestion-input + .thumb {
+    background-color: #42a5f5
+}
+{% endblock %}
+{% block title %}{% trans "Results - Individual Symphony" %}{% endblock %}
+{% block cover_photo_up %}
+<div class="row center">
+<div class="col s6 offset-s3 page-preloader">
+<h4 id="please-wait" style="font-size: 1.75em; margin-top: 50px;">{% trans "Please wait while results are being processed... 🤔" %}</h4>
+<img style="margin-top: 25px; margin-bottom: 60px" alt="Loading..." title="Loading..." class="responsive-img card-panel" src="/static/images/page-preloader.gif">
+</div>
+</div>
+<div style="display: none" class="content">
+        <div style="font-size: 0.80em" id="progress-circle" class="progress-circle p0">
+                <span class="page-scroll-text"></span>
+                <div class="left-half-clipper">
+                <div class="first50-bar"></div>
+                <div class="value-bar"></div>
+            </div>
+        </div>
+<section id="results">
+{% endblock %}
+{% block h1 %}<h1>{% trans "Results" %}</h1>{% endblock %}
+{% block description %}
+{% blocktrans %}
+<p><span class="hvr-backward">✨</span> Here are your big five personality analysis and possible genre correlation values some of them may interest you. You can look at the values by hovering over points in charts. If any song seems irrelevant to you, please send your feedback. At the bottom of the page, there is a form for your genre suggestions. <strong style="font-weight: bold">Don't forget to submit them to us to improve our predictions!</strong> <span class="hvr-forward">🌌</span></p>
+{% endblocktrans %}
+<hr>
+<h3>{% trans "Big Five Personality Analysis" %}</h2>
+<div class="row">
+<canvas id="personalityChart" class="col s8"></canvas>
+</div>
+<div class="row">
+        <ul class="collapsible popout col s10 offset-s1">
+                <li>
+                  <div class="center collapsible-header" style="display: block"><i class="material-icons">open_with</i>{% trans "Openness" as openness %}{{ openness }}</div>
+                  <div class="collapsible-body"><span>
+{% trans "Appreciation for art, emotion, adventure, unusual ideas, curiosity, and variety of experience. Openness reflects the degree of intellectual curiosity, creativity and a preference for novelty and variety a person has. It is also described as the extent to which a person is imaginative or independent and depicts a personal preference for a variety of activities over a strict routine. High openness can be perceived as unpredictability or lack of focus, and more likely to engage in risky behaviour or drug taking." %}
+                  </span></div>
+                </li>
+                <li>
+                  <div class="center collapsible-header" style="display: block"><i class="material-icons">accessibility</i>{% trans "Agreeableness" as agreeableness %}{{ agreeableness }}</div>
+                  <div class="collapsible-body"><span>
+{% trans "Tendency to be compassionate and cooperative rather than suspicious and antagonistic towards others. It is also a measure of one's trusting and helpful nature, and whether a person is generally well-tempered or not. High agreeableness is often seen as naive or submissive. Low agreeableness personalities are often competitive or challenging people, which can be seen as argumentative or untrustworthy." %}
+                  </span></div>
+                </li>
+                <li>
+                  <div class="center collapsible-header" style="display: block"><i class="material-icons">whatshot</i>{% trans "Extraversion" as extraversion %}{{ extraversion }}</div>
+                  <div class="collapsible-body"><span>
+{% trans "Energetic, surgency, assertiveness, sociability and the tendency to seek stimulation in the company of others, and talkativeness. High extraversion is often perceived as attention-seeking and domineering." %}
+                  </span></div>
+                </li>
+                <li>
+                    <div class="center collapsible-header" style="display: block"><i class="material-icons">developer_board</i>{% trans "Conscientiousness" as conscientiousness %}{{ conscientiousness }}</div>
+                    <div class="collapsible-body"><span>
+{% trans "Tendency to be organized and dependable, show self-discipline, act dutifully, aim for achievement, and prefer planned rather than spontaneous behavior. High conscientiousness is often perceived as being stubborn and focused. Low conscientiousness is associated with flexibility and spontaneity, but can also appear as sloppiness and lack of reliability." %}
+                    </span></div>
+                </li>
+                <li>
+                    <div class="center collapsible-header" style="display: block"><i class="material-icons">face</i>{% trans "Neuroticism" as neuroticism %}{{ neuroticism }}</div>
+                    <div class="collapsible-body"><span>
+{% trans "Tendency to be prone to psychological stress. The tendency to experience unpleasant emotions easily, such as anger, anxiety, depression, and vulnerability. Neuroticism also refers to the degree of emotional stability and impulse control and is sometimes referred to by its low pole, 'emotional stability'. High stability manifests itself as a stable and calm personality, but can be seen as uninspiring and unconcerned. Low stability manifests as the reactive and excitable personality often found in dynamic individuals, but can be perceived as unstable or insecure." %}
+                    </span></div>
+                </li>
+        </ul>
+        </div>
+</section>
+<hr>
+<section id="genre-interest-analysis">
+<h3>{% trans "Genre Interest Analysis" %}</h2>
+<div class="row">
+<canvas id="genreCorrelations" class="col s8"></canvas>
+</div>
+</section>
+        <script>
+        var ctx = document.getElementById("personalityChart");
+        var myPersonalityChart = new Chart(ctx, {
+            type: 'radar',
+            data: {
+            labels: ['{{ openness }}', '{{ agreeableness }}', '{{ neuroticism }}', '{{ conscientiousness }}', '{{ extraversion }}'],
+            datasets: [{
+                data: [{{ chart_data.openness }}, {{ chart_data.agreeableness }}, {{ chart_data.neuroticism }}, {{ chart_data.conscientiousness }}, {{ chart_data.extraversion }}],
+                label: '{% trans "Big Five Personality Value" %}',
+                backgroundColor: 'rgba(255, 111, 97, 0.2)',
+                fill: true,
+                borderColor: 'rgb(255, 111, 97)',
+                pointBackgroundColor: 'rgb(255, 111, 97)',
+                pointHoverBackgroundColor: 'rgb(255, 111, 97)',
+                pointBorderColor: '#fff',
+                pointHoverBorderColor: 'rgb(255, 111, 97)',
+                borderWidth: 3,
+                lineTension: 0
+            }]
+        },
+            options: {
+            scale: {
+                display: true
+            }
+        }
+        });
+        
+        var ctx2 = document.getElementById("genreCorrelations");
+        var mygenreCorrelationsChart = new Chart(ctx2, {
+            type: 'radar',
+            data: {
+            labels: [
+                'R & B', 'Rap', 'Electronic', 'Rock', 'New Age',
+                'Classical', 'Reggae', 'Blues', 'Country', 'World',
+                'Folk', 'Easy Listening', 'Jazz', 'Vocal', 'Punk',
+                'Alternative', 'Pop', 'Heavy Metal'
+                ],
+            datasets: [{
+                data: [
+                '{{ chart_data.r_b }}', '{{ chart_data.rap }}', '{{ chart_data.electronic }}', '{{ chart_data.rock }}', '{{ chart_data.new_age }}',
+                '{{ chart_data.classical }}', '{{ chart_data.reggae }}', '{{ chart_data.blues }}', '{{ chart_data.country }}', '{{ chart_data.world }}',
+                '{{ chart_data.folk }}', '{{ chart_data.easy_listening }}', '{{ chart_data.jazz }}', '{{ chart_data.vocal }}', '{{ chart_data.punk }}',
+                '{{ chart_data.alternative }}', '{{ chart_data.pop }}', '{{ chart_data.heavy_metal }}'
+                ],
+                label: '{% trans "Genre Correlation Value" %}',
+                backgroundColor: 'rgba(255, 111, 97, 0.2)',
+                fill: true,
+                borderColor: 'rgb(255, 111, 97)',
+                pointBackgroundColor: 'rgb(255, 111, 97)',
+                pointHoverBackgroundColor: 'rgb(255, 111, 97)',
+                pointBorderColor: '#fff',
+                pointHoverBorderColor: 'rgb(255, 111, 97)',
+                borderWidth: 3,
+                lineTension: 0
+            }]
+        },
+            options: {
+            scale: {
+                display: true
+            }
+        }
+        });
+        </script>
+{% endblock %}
+{% block content %}
+<hr>
+<section id="recommended-songs">
+<h3 id="recommendedSongs">{% trans "Recommended Songs" %}</h2>
+            {% for id, name, r_b, rap, electronic, rock, new_age, classical, reggae, blues, country, world, folk, easy_listening, jazz, vocal, punk, alternative, pop, heavy_metal in data %}
+                {% if forloop.counter0|divisibleby:2 %}
+                <div class="row card-panel pink lighten-5">
+                {% endif %}
+                {% if forloop.counter0|divisibleby:2 %}
+                <div style="margin-left: -5px; margin-right: 5px" class="col s6 center">
+                {% else %}
+                <div style="margin-left: 5px; margin-right: -5px" class="col s6 center">
+                {% endif %}
+                    <div class="row video-container">
+                    <iframe id="spotifyEmbed" src="https://open.spotify.com/embed/track/{{ id }}" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                    </div>
+                    <div class="row">
+                        <a id="{{ recommendation_id }}-{{ forloop.counter }}" style="font-size: 0.65em" class="red lighten-2 waves-effect waves-light btn-small embedButton"><i style="font-size: 0.75rem" class="material-icons left">sentiment_very_dissatisfied</i>{% trans "dissatisfied" as n_r %}{{ n_r }}</a>
+                    </div>
+                    <div class="row">
+                        <a id="info_button" style="font-size: 0.65em" class="green lighten-2 waves-effect waves-light btn-small modal-trigger" href="#songGenreModal_{{ id }}"><i style="font-size: 0.75rem" class="material-icons left">info</i>{% trans "info" as info %}{{ info }}</a>
+                    </div>
+                    <div id="songGenreModal_{{ id }}" class="modal">
+                        <div class="video-container">
+                            <canvas id="songGenreChart_{{ id }}"></canvas>
+                        </div>
+                        <div class="col s12">
+                            <div class="card-panel songSuggestionCard" id="songGenreSuggestionCard_{{ id }}">
+                            <p style="font-weight: bold">{% trans "Is primary genre prediction of song incorrect?" %} 😔</p>
+                            <div class="input-field col s12">
+                                    <select id="songGenreSuggestion_{{ id }}">
+                                      <option value="" disabled selected>{% trans "Choose your option" %}</option>
+                                      <option value="r_b">R & B</option>
+                                      <option value="rap">Rap</option>
+                                      <option value="electronic">Electronic</option>
+                                      <option value="rock">Rock</option>
+                                      <option value="alternative">Alternative</option>
+                                      <option value="jazz">Jazz</option>
+                                      <option value="vocal">Vocal</option>
+                                      <option value="easy_listening">Easy Listening</option>
+                                      <option value="reggae">Reggae</option>
+                                      <option value="punk">Punk</option>
+                                      <option value="heavy_metal">Heavy Metal</option>
+                                      <option value="blues">Blues</option>
+                                      <option value="country">Country</option>
+                                      <option value="world">World</option>
+                                      <option value="folk">Folk</option>
+                                      <option value="new_age">New Age</option>
+                                      <option value="classical">Classical</option>
+                                      <option value="pop">Pop</option>
+                                    </select>
+                                    <label>{% trans "Song Genre Suggestion" %}</label>
+                                  </div>
+                            <div class="row">
+                                    <a id="{{ id }}" style="font-size: 0.65em" class="songGenreSuggestionButton green lighten-2 waves-effect waves-light btn-large"><i style="font-size: 0.75rem" class="material-icons left">send</i>{% trans "send" as send %}{{ send }}</a>
+                                </div>
+                                </div>
+                            <div class="modal-footer">
+                              <a href="#!" class="modal-close btn red lighten-2 white-text waves-effect waves-green btn-flat">OK</a>
+                            </div>
+                            </div>
+                          </div>
+                    </div>
+                {% if forloop.counter|divisibleby:2 %}
+            </div>
+                {% endif %}
+            {% endfor %}
+            <form method="POST" id="load-more-form" action="/evaluate">
+                <input type="hidden" id="more_suggestions" name="more_suggestions" value="True" />
+                <input type="hidden" id="recommendation_id" name="recommendation_id" value="{{ recommendation_id }}" />
+                <input type="hidden" id="age_group" name="age_group" value="{{ chart_data.age_group }}" />
+                <input type="hidden" id="openness" name="openness" value="{{ chart_data.openness }}" />
+                <input type="hidden" id="agreeableness" name="agreeableness" value="{{ chart_data.agreeableness }}" />
+                <input type="hidden" id="neuroticism" name="neuroticism" value="{{ chart_data.neuroticism }}" />
+                <input type="hidden" id="conscientiousness" name="conscientiousness" value="{{ chart_data.conscientiousness }}" />
+                <input type="hidden" id="extraversion" name="extraversion" value="{{ chart_data.extraversion }}" />
+            </form>
+            <div class="row">
+                <a id="loadMoreButton" style="font-size: 0.8rem" class="card-panel col s4 offset-s4 z-depth-5 btn-large waves-effect waves-light red lighten-1"><i style="font-size: 2rem" class="large material-icons left">favorite</i>{% trans "more suggestions?" %}</a>
+            </div>
+            <div id="preloader" class="row center" style="display: none">
+                    <div class="preloader-wrapper active">
+                            <div class="spinner-layer spinner-red-only">
+                              <div class="circle-clipper left">
+                                <div class="circle"></div>
+                              </div><div class="gap-patch">
+                                <div class="circle"></div>
+                              </div><div class="circle-clipper right">
+                                <div class="circle"></div>
+                              </div>
+                            </div>
+                          </div>
+            </div>
+        </section>
+        <section id="genre-suggestions">
+            <div id="genreSuggestionDiv" class="card-panel">
+            <div class="row">
+                <div class="col s8 offset-s2 hoverable hvr-icon-buzz-out">
+                <p class="card-panel blue lighten-1 white-text hvr-icon"><i style="font-size: 2rem" class="large material-icons left">new_releases</i>{% trans "Help us to understand your genre interests and improve deep learning model for recommendations in the future!" %}</p>
+                </div>
+            </div>
+            <form id="genreSuggestionForm">
+            <input type="hidden" id="gsRecommendationId" name="recommendation_id" value="{{ recommendation_id }}" />
+            <div class="row">
+                <div class="col s3">
+                    <label for="r_b">R & B</label>
+                    <p class="range-field">
+                    <input id="genre-suggestion-input" type="range" id="r_b" name="r_b" min="1" max="5" step="1" />
+                    </p>
+                </div>
+                <div class="col s3">
+                    <label for="rap">Rap</label>
+                    <p class="range-field">
+                    <input id="genre-suggestion-input" type="range" id="rap" name="rap" min="1" max="5" step="1" />
+                    </p>
+                </div>
+                <div class="col s3">
+                    <label for="electronic">Electronic</label>
+                    <p class="range-field">
+                    <input id="genre-suggestion-input" type="range" id="electronic" name="electronic" min="1" max="5" step="1" />
+                    </p>
+                </div>
+                <div class="col s3">
+                    <label for="rock">Rock</label>
+                    <p class="range-field">
+                    <input id="genre-suggestion-input" type="range" id="rock" name="rock" min="1" max="5" step="1" />
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s3">
+                    <label for="new_age">New Age</label>
+                    <p class="range-field">
+                    <input id="genre-suggestion-input" type="range" id="new_age" name="new_age" min="1" max="5" step="1" />
+                    </p>
+                </div>
+                <div class="col s3">
+                    <label for="classical">Classical</label>
+                    <p class="range-field">
+                    <input id="genre-suggestion-input" type="range" id="classical" name="classical" min="1" max="5" step="1" />
+                    </p>
+                </div>
+                <div class="col s3">
+                    <label for="reggae">Reggae</label>
+                    <p class="range-field">
+                    <input id="genre-suggestion-input" type="range" id="reggae" name="reggae" min="1" max="5" step="1" />
+                    </p>
+                </div>
+                <div class="col s3">
+                    <label for="blues">Blues</label>
+                    <p class="range-field">
+                    <input id="genre-suggestion-input" type="range" id="blues" name="blues" min="1" max="5" step="1" />
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s3">
+                    <label for="country">Country</label>
+                    <p class="range-field">
+                    <input id="genre-suggestion-input" type="range" id="country" name="country" min="1" max="5" step="1" />
+                    </p>
+                </div>
+                <div class="col s3">
+                    <label for="world">World</label>
+                    <p class="range-field">
+                    <input id="genre-suggestion-input" type="range" id="world" name="world" min="1" max="5" step="1" />
+                    </p>
+                </div>
+                <div class="col s3">
+                    <label for="folk">Folk</label>
+                    <p class="range-field">
+                    <input id="genre-suggestion-input" type="range" id="folk" name="folk" min="1" max="5" step="1" />
+                    </p>
+                </div>
+                <div class="col s3">
+                    <label for="easy_listening">Easy Listening</label>
+                    <p class="range-field">
+                    <input id="genre-suggestion-input" type="range" id="easy_listening" name="easy_listening" min="1" max="5" step="1" />
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s3">
+                    <label for="jazz">Jazz</label>
+                    <p class="range-field">
+                    <input id="genre-suggestion-input" type="range" id="jazz" name="jazz" min="1" max="5" step="1" />
+                    </p>
+                </div>
+                <div class="col s3">
+                    <label for="vocal">Vocal</label>
+                    <p class="range-field">
+                    <input id="genre-suggestion-input" type="range" id="vocal" name="vocal" min="1" max="5" step="1" />
+                    </p>
+                </div>
+                <div class="col s3">
+                    <label for="punk">Punk</label>
+                    <p class="range-field">
+                    <input id="genre-suggestion-input" type="range" id="punk" name="punk" min="1" max="5" step="1" />
+                    </p>
+                </div>
+                <div class="col s3">
+                    <label for="alternative">Alternative</label>
+                    <p class="range-field">
+                    <input id="genre-suggestion-input" type="range" id="alternative" name="alternative" min="1" max="5" step="1" />
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s3 push-s3">
+                    <label for="pop">Pop</label>
+                    <p class="range-field">
+                    <input id="genre-suggestion-input" type="range" id="pop" name="pop" min="1" max="5" step="1" />
+                    </p>
+                </div>
+                <div class="col s3 push-s3">
+                    <label for="heavy_metal">Heavy Metal</label>
+                    <p class="range-field">
+                    <input id="genre-suggestion-input" type="range" id="heavy_metal" name="heavy_metal" min="1" max="5" step="1" />
+                    </p>
+                </div>
+            </div>
+        </div>
+            <div class="row center">
+            <a id="genreSuggestionButton" style="font-size: 0.8rem" class="card-panel col s4 offset-s4 z-depth-5 btn-large waves-effect waves-light blue lighten-1"><i style="font-size: 3.5rem" class="large material-icons">subdirectory_arrow_right</i></a>
+    </div>
+    </form>
+</section>
+<script>
+function scrollProgress() {
+    var currentState = document.body.scrollTop || document.documentElement.scrollTop;
+    var pageHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrollStatePercentage = (currentState / pageHeight) * 100;
+    var stringPercentage = String(Number(scrollStatePercentage).toFixed());
+    if (stringPercentage >= 92) stringPercentage = 100;
+    document.querySelector(".page-scroll-text").textContent = stringPercentage + "%";
+    $('#progress-circle').removeClass();
+    $('#progress-circle').addClass('progress-circle');
+    $('#progress-circle').addClass('p' + stringPercentage);
+  }
+
+window.onscroll = function () { scrollProgress() };
+var mainGenreSuggestions = [];
+{% for id, name, r_b, rap, electronic, rock, new_age, classical, reggae, blues, country, world, folk, easy_listening, jazz, vocal, punk, alternative, pop, heavy_metal in data %}
+var songGenreChart_{{ id }} = document.getElementById("songGenreChart_{{ id }}");
+        var genrePredictionsChart_{{ id }} = new Chart(songGenreChart_{{ id }}, {
+            type: 'bar',
+            data: {
+            labels: [
+                'R & B', 'Rap', 'Electronic', 'Rock', 'New Age',
+                'Classical', 'Reggae', 'Blues', 'Country', 'World',
+                'Folk', 'Easy Listening', 'Jazz', 'Vocal', 'Punk',
+                'Alternative', 'Pop', 'Heavy Metal'
+                ],
+            datasets: [{
+                data: [
+                '{{ r_b }}', '{{ rap }}', '{{ electronic }}', '{{ rock }}', '{{ new_age }}',
+                '{{ classical }}', '{{ reggae }}', '{{ blues }}', '{{ country }}', '{{ world }}',
+                '{{ folk }}', '{{ easy_listening }}', '{{ jazz }}', '{{ vocal }}', '{{ punk }}',
+                '{{ alternative }}', '{{ pop }}', '{{ heavy_metal }}'
+                ],
+                label: '{% trans "Genre Prediction Value" %}',
+                backgroundColor: 'rgba(255, 111, 97, 0.2)',
+                fill: true,
+                borderColor: 'rgb(255, 111, 97)',
+                pointBackgroundColor: 'rgb(255, 111, 97)',
+                pointHoverBackgroundColor: 'rgb(255, 111, 97)',
+                pointBorderColor: '#fff',
+                pointHoverBorderColor: 'rgb(255, 111, 97)',
+                borderWidth: 3,
+                lineTension: 0
+            }]
+        }
+        });
+    mainGenreSuggestions.push(genrePredictionsChart_{{ id }});
+{% endfor %}
+</script>
+{% endblock %}

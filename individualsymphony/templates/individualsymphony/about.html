@@ -1,0 +1,25 @@
+{% extends "individualsymphony/base.html" %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% block og-title %}{% trans "About - Individual Symphony" %}{% endblock %}
+{% block desc %}{% trans "This project is aimed to provide a music recommendation system that recommend songs based on people's personalities." %}{% endblock %}
+{% block og-desc %}{% trans "This project is aimed to provide a music recommendation system that recommend songs based on people's personalities." %}{% endblock %}
+{% block canonical-url %}https://individualsymphony.com/{{ LANGUAGE_CODE }}/about{% endblock %}
+{% block og-url %}https://individualsymphony.com/{{ LANGUAGE_CODE }}/about{% endblock %}
+{% block twitter-title %}{% trans "About - Individual Symphony" %}{% endblock %}
+{% block twitter-desc %}{% trans "This project is aimed to provide a music recommendation system that recommend songs based on people's personalities." %}{% endblock %}
+{% block title %}{% trans "About - Individual Symphony" %}{% endblock %}
+{% block h1 %}<h1>{% trans "About" %}</h1>{% endblock %}
+{% block description %}
+{% blocktrans %}
+<p>This project is aimed to provide a <strong>music recommendation system</strong> that recommend songs based on people's personalities. 
+    Big five personality traits (five factor model <strong>(FFM)</strong> or <strong>OCEAN</strong> model) are useful when studying on psychological identities. 
+    Therefore, some academic researches and surveys on correlations between musical taste (mainly genres) and big five personality traits are heavily used in this project. <p>Spotify API integrated with recommendation system to maintain artists, albums, songs, and significant audio features to create a deep learning model which classifies songs regarding to their genres. Additionly, recommendation system accepts feedbacks from participants if recommended songs are not relevant in matter of musical taste, participants are able to send their genre preferences to improve model predictions.</p> <p>Python, Django, PostgreSQL, TensorFlow, Keras, numpy, pandas, scikit-learn, MaterializeCSS, and many other technologies are used in development phase.</p> <p>Developed during graduation thesis by <b>Orçun Özdemir</b> in <b>Istanbul Technical University</b> and licensed under a Creative Commons Attribution 4.0 International License.</p>
+{% endblocktrans %}
+{% endblock %}
+{% block content %}
+<p>{% trans "Support to maintain, all donations are welcome!" %}</p>
+<code style="font-size: 0.9em">
+<i class="hvr-bounce-in fab fa-bitcoin"></i><span style="font-weight: bold"> BTC (Bitcoin):</span> 153LVRoDEoTiR3qJEJZUGoadfAU3w23UHd<br>
+<i class="hvr-bounce-in fab fa-monero"></i><span style="font-weight: bold"> XMR (Monero):</span> 44o3jRiPj6GCFMgUeNzqKzCu5DJrxFbXuKJo<wbr>8zkWN41u8qsPKiN7aV2axms1QVCUmXRptuU55ur<wbr>JHSTz4SysGvPG5PwHzSp</code>
+{% endblock %}

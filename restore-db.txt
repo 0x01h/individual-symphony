@@ -1,0 +1,15 @@
+DROP SCHEMA public CASCADE;
+CREATE SCHEMA public;
+
+python3 manage.py migrate
+Add "auto_now=True" to RecommendationResults() 'created_at' field.
+Add "auto_now=True" to SongGenreSuggestion() 'created_at' field.
+Add "auto_now=True" to GenreSuggestions() 'created_at' field.
+
+DELETE FROM song_genre_suggestion;
+DELETE FROM genre_suggestions;
+DELETE FROM recommendation_results;
+
+ALTER SEQUENCE song_genre_suggestion_id_seq RESTART WITH 1;
+ALTER SEQUENCE genre_suggestions_id_seq RESTART WITH 1;
+ALTER SEQUENCE recommendation_results_id_seq RESTART WITH 1;

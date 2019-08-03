@@ -1,0 +1,100 @@
+body {
+  background-image: linear-gradient(120deg, #fdfbfb 0%, #ffffff 100%);
+}
+
+hr {
+  border-top: 0px;
+}
+
+::selection {
+  background: #ffb7b7; /* WebKit/Blink Browsers */
+}
+
+::-moz-selection {
+  background: #ffb7b7; /* Gecko Browsers */
+}
+
+.dropdown-content li:hover, .dropdown-content li.active {
+  background: none;
+}
+
+#social-buttons:link
+{
+    color:white;
+}
+
+#social-buttons:visited
+{
+    color:white;
+}
+
+#social-buttons:hover
+{
+    color:black;
+}
+
+input[type=range] {
+  border: none;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  background-color: #ef5350;
+}
+
+input[type=range]::-moz-range-thumb {
+  background-color: #ef5350;
+}
+
+input[type=range]::-ms-thumb {
+  background-color: #ef5350;
+}
+
+/* These are to edit the thumb and the text inside the thumb. */
+input[type=range] + .thumb {
+  background-color: #ef5350;
+}
+
+input[type=range] + .thumb.active .value {
+  color: white;
+}
+
+.switch label .lever {
+  background-color: #ef5350;
+}
+
+.switch label input[type=checkbox]:checked+.lever:before {
+  background-color: white !important;
+}
+
+.switch label .lever::after {
+  background-color: white !important;
+}
+
+.switch label input[type=checkbox]:checked+.lever:after {
+    background-color: white !important;
+}
+
+.switch label input[type=checkbox]:checked+.lever {
+    background-color: #ef5350 !important;
+}
+
+label, p, ol, ul {
+  font-family: 'Lora', serif;
+}
+
+label, a, h4, h3, h2, h1, footer, .age-group {
+  font-weight: bold;
+}
+
+a, i, h4, h3, h2, h1, .page-footer, .age-group {
+  font-family: 'Palatino Linotype', 'Book Antiqua', 'Palatino', serif;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+main {
+  flex: 1 0 auto;
+}

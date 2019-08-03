@@ -1,0 +1,543 @@
+{% extends "individualsymphony/base.html" %}
+{% load i18n %}
+{% block script %}
+$(document).ready(function(){
+  let switchState = 1;
+    $('#modeSwitch').click(function() {
+      switchState++;
+      if (switchState % 2 == 0) {
+      $('#bfptBasic').hide(1000);
+      $('#bfptAdvanced').show(1000);
+    }
+    else {
+      $('#bfptAdvanced').hide(1000);
+      $('#bfptBasic').show(1000);
+    }
+  });
+
+  $('#quickSubmitButton').click(function(event) {
+    $('#quickSubmitButton').hide();
+    $('#quickModePreloader').show();
+    $('#quizes').fadeOut('slow');
+    $('#loader').fadeIn('slow');
+    $("html, body").animate({ scrollTop: $('#loader').offset().top }, 1000);
+  });
+
+  $('#advancedSubmitButton').click(function(event) {
+    $('#advancedSubmitButton').hide();
+    $('#advancedModePreloader').show();
+    $('#quizes').fadeOut('slow');
+    $('#loader').fadeIn('slow');
+    $("html, body").animate({ scrollTop: $('#loader').offset().top }, 1000);
+  });
+});
+function openness_info(){
+  swal({
+    title: '{% trans "Openness" as openness %}{{ openness }}',
+    text: '{% trans "Appreciation for art, emotion, adventure, unusual ideas, curiosity, and variety of experience." %}',
+    icon: 'info',
+    button: '{% trans "Understand!" as understand %}{{ understand }}"'
+  });
+}
+function agreeableness_info(){
+  swal({
+    title: '{% trans "Agreeableness" as agreeableness %}{{ agreeableness }}',
+    text: "{% trans "Tendency to be compassionate and cooperative rather than suspicious and antagonistic towards others." %}",
+    icon: 'info',
+    button: '{{ understand }}'
+  });
+}
+function neuroticism_info(){
+  swal({
+    title: '{% trans "Neuroticism" as neuroticism %}{{ neuroticism }}',
+    text: "{% trans "Tendency to be prone to psychological stress. The tendency to experience unpleasant emotions easily, such as anger, anxiety, depression, and vulnerability." %}",
+    icon: 'info',
+    button: '{{ understand }}'
+  });
+}
+function conscientiousness_info(){
+  swal({
+    title: '{% trans "Conscientiousness" as conscientiousness %}{{ conscientiousness }}',
+    text: '{% trans "Tendency to be organized and dependable, show self-discipline, act dutifully, aim for achievement, and prefer planned rather than spontaneous behavior." %}',
+    icon: 'info',
+    button: '{{ understand }}'
+  });
+}
+function extraversion_info(){
+  swal({
+    title: '{% trans "Extraversion" as extraversion %}{{ extraversion }}',
+    text: '{% trans "Energetic, surgency, assertiveness, sociability and the tendency to seek stimulation in the company of others, and talkativeness." %}',
+    icon: 'info',
+    button: '{{ understand }}'
+  });
+}
+function advanced_mode_info(){
+  swal({
+    title: '{% trans "Advanced Mode" %}',
+    text: '{% trans "Advanced mode consists 44 questions and takes 10 minutes approximately. Right side of the slider indicates you strongly agree with assumption, left side of the slider indicates you strongly disagree, middle of the slider means that you are neutral or not sure about the answer. Try not to leave sliders in the middle as much as you can." %}',
+    icon: 'info',
+    button: '{{ understand }}'
+  });
+}
+{% endblock %}
+{% block ext-js %}<script defer src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>{% endblock %}
+{% block title %}{% trans "Individual Symphony" as home_title %}{{ home_title }} - {% trans "Music Recommendation System Based On Personality" as home_subtitle %}{{ home_subtitle }}{% endblock %}
+{% block cover_photo_up %}
+<h1><img class="responsive-img hvr-buzz" title="Individual Symphony" alt="Individual Symphony" style="margin-top: -30px; margin-bottom: -20px; max-height: 25%;" src="/static/images/logo.png"></h1>
+{% endblock %}{% block h1 %}{% endblock %}
+{% block description %}
+{% blocktrans %}
+<p><span class="hvr-buzz">🎶</span> <strong style="font-weight: bold">Individual Symphony</strong> is a music recommendation system based on psychological personalities. Research papers about big five personality and academic surveys on correlations between personalities and genre interests are heavily used in this system. Also, a deep learning model classifies songs by genres using features provided by Spotify API <i style="color: #1ED761" class="hvr-bounce-in fab fa-spotify"></i>. You can either give your big five personality values manually in basic mode, or select advanced mode to let us determine your values. After that you will get your recommended songs for your unique personal traits. <span style='font-weight: bold'>It is recommended to use advanced mode for more specific results.</span> Enjoy, while exploring your inside symphony! <span class="hvr-float-shadow">👩‍🎤 👨‍🎤</span></p>
+{% endblocktrans %}
+{% endblock %}
+{% block content %}
+<div id="loader" style="display: none" class="row center">
+  <div class="col s6 offset-s3 page-preloader">
+  <h4 id="please-wait" style="font-size: 1.75em; margin-top: 50px;">{% trans "Please wait while results are being calculated... 👾" %}</h4>
+  <img style="margin-top: 25px; margin-bottom: 60px" alt="Loading..." title="Loading..." class="responsive-img card-panel" src="/static/images/page-preloader.gif">
+  </div>
+  </div>
+<div id="quizes">
+<div class="row center">
+  <div class="s4 push-s4">
+    <div class="switch">
+        <label>
+          {% trans "Basic Mode" %}
+          <input id="modeSwitch" type="checkbox">
+          <span class="lever"></span>
+          {% trans "Advanced Mode" %} <a href="javascript:void()" class="hvr-icon-pulse"><i onclick="advanced_mode_info()" style="font-size: 0.75rem" class="hvr-icon material-icons">info</i></a>
+        </label>
+      </div>
+    </div>
+</div>
+<div id="bfptBasic" class="center">
+    <h2 id="subtitle" style="margin-top: -5px; margin-bottom: -5px; font-size: 2em"><i class="fas fa-user-edit"></i> {% trans "Big Five Personality Values" %}</h2>
+    <form method="POST" action="/evaluate">
+      {% csrf_token %}
+      <input type="hidden" name="genre_suggestions" value="False" />
+      <div class="row">
+          <div class="input-field col s4 push-s4">
+          <h6><p class="age-group grey-text text-darken-3 center-align"><i class="fas fa-users"></i> {% trans "Age Group" as age_group %}{{ age_group }}</p></h6>
+          <select name="age_group" id="id_age_group" class="browser-default">
+            <option value="12-19">12-19</option>
+            <option value="20-39">20-39</option>
+            <option value="40-65">40-65</option>
+          </select>
+          </div>
+          </div>
+          <div class="row">
+      <div class="col s4">
+      <label for="openness"><a href="javascript:void()" class="hvr-icon-pulse"><i onclick="openness_info()" style="font-size: 1rem" class="hvr-icon material-icons">info</i></a><br>{% trans "Openness" %}</label>
+      <p class="range-field">
+        <input type="range" name="openness" id="openness" min="20" max="100" step="1" />
+      </p>
+      </div>
+      <div class="col s4">
+      <label for="agreeableness"><a href="javascript:void()" class="hvr-icon-pulse"><i onclick="agreeableness_info()" style="font-size: 1rem" class="hvr-icon material-icons">info</i></a><br>{% trans "Agreeableness" %}</label>
+      <p class="range-field">
+        <input type="range" name="agreeableness" id="agreeableness" min="20" max="100" step="1" />
+      </p>
+      </div>
+      <div class="col s4">
+      <label for="neuroticism"><a href="javascript:void()" class="hvr-icon-pulse"><i onclick="neuroticism_info()" style="font-size: 1rem" class="hvr-icon material-icons">info</i></a><br>{% trans "Neuroticism" %}</label>
+      <p class="range-field">
+        <input type="range" name="neuroticism" id="neuroticism" min="20" max="100" step="1" />
+      </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s4 offset-s2">
+      <label for="conscientiousness"><a href="javascript:void()" class="hvr-icon-pulse"><i onclick="conscientiousness_info()" style="font-size: 1rem" class="hvr-icon material-icons">info</i></a><br>{% trans "Conscientiousness" %}</label>
+      <p class="range-field">
+        <input type="range" name="conscientiousness" id="conscientiousness" min="20" max="100" step="1" />
+      </p>
+      </div>
+      <div class="col s4">
+      <label for="extraversion"><a href="javascript:void()" class="hvr-icon-pulse"><i onclick="extraversion_info()" style="font-size: 1rem" class="hvr-icon material-icons">info</i></a><br>{% trans "Extraversion" %}</label>
+      <p class="range-field">
+        <input type="range" name="extraversion" id="extraversion" min="20" max="100" step="1" />
+      </p>
+      </div>
+    </div>
+    <div class="row">
+      <button id="quickSubmitButton" class="z-depth-5 btn-large waves-effect waves-light col s4 push-s4 red lighten-1"><i class="large material-icons">send</i></button>
+      <div id="quickModePreloader" class="row center" style="display: none">
+        <div class="preloader-wrapper active">
+                <div class="spinner-layer spinner-red-only">
+                  <div class="circle-clipper left">
+                    <div class="circle"></div>
+                  </div><div class="gap-patch">
+                    <div class="circle"></div>
+                  </div><div class="circle-clipper right">
+                    <div class="circle"></div>
+                  </div>
+                </div>
+              </div>
+  </div>
+    </div>
+    </form>
+      </div>
+
+      <div id="bfptAdvanced" style="display: none">
+          <h2 id="subtitle" style="margin-top: -5px; margin-bottom: -5px; font-size: 2em"><i class="fas fa-user-edit"></i> {% trans "Tell about yourself: you're someone who..." %}</h2>
+          <form method="POST" action="/evaluate">
+          {% csrf_token %}
+          <input type="hidden" id="advanced_mode" name="advanced_mode" value="True" />
+          <div class="row">
+          <div class="input-field col s4 push-s4">
+          <h6><p class="age-group grey-text text-darken-3 center-align"><i class="fas fa-users"></i> {{ age_group }}</p></h6>
+          <select name="age_group" id="id_age_group" class="browser-default">
+            <option value="12-19">12-19</option>
+            <option value="20-39">20-39</option>
+            <option value="40-65">40-65</option>
+          </select>
+          </div>
+          </div>
+          
+          <div class="row">
+          <div class="col s3">
+          <label for="id_question_1_0">{% trans "Is talkative" %}</label>
+          <p class="range-field">
+          <input type="range" id="id_question_1" name="question_1" min="1" max="5" step="1" />
+          </p>
+          </div>
+          
+          <div class="col s3">
+          <label for="id_question_2_0">{% trans "Tends to find fault with others" %}</label>
+          <p class="range-field">
+          <input type="range" id="id_question_2" name="question_2" min="1" max="5" step="1" />
+          </p>
+          </div>
+          
+          <div class="col s3">
+          <label for="id_question_3_0">{% trans "Does a thorough job" %}</label>
+          <p class="range-field">
+          <input type="range" id="id_question_3" name="question_3" min="1" max="5" step="1" />
+          </p>
+          </div>
+          
+          <div class="col s3">
+          <label for="id_question_4_0">{% trans "Is depressed, blue" %}</label>
+          <p class="range-field">
+          <input type="range" id="id_question_4" name="question_4" min="1" max="5" step="1" />
+          </p>
+          </div>
+          </div>
+          
+          <div class="row">
+          <div class="col s3">
+          <label for="id_question_5_0">{% trans "Is original, comes up with new ideas" %}</label>
+          <p class="range-field">
+          <input type="range" id="id_question_5" name="question_5" min="1" max="5" step="1" />
+          </p>
+          </div>
+          
+          <div class="col s3">
+          <label for="id_question_6_0">{% trans "Is reserved" %}</label>
+          <p class="range-field">
+          <input type="range" id="id_question_6" name="question_6" min="1" max="5" step="1" />
+          </p>
+          </div>
+          
+          <div class="col s3">
+          <label for="id_question_7_0">{% trans "Is helpful and unselfish with others" %}</label>
+          <p class="range-field">
+          <input type="range" id="id_question_7" name="question_7" min="1" max="5" step="1" />
+          </p>
+          </div>
+          
+          <div class="col s3">
+          <label for="id_question_8_0">{% trans "Can be somewhat careless" %}</label>
+          <p class="range-field">
+          <input type="range" id="id_question_8" name="question_8" min="1" max="5" step="1" />
+          </p>
+          </div>
+          </div>
+          
+          <div class="row">
+          <div class="col s3">
+          <label for="id_question_9_0">{% trans "Is relaxed, handles stress well" %}</label>
+          <p class="range-field">
+          <input type="range" id="id_question_9" name="question_9" min="1" max="5" step="1" />
+          </p>
+          </div>
+          
+          <div class="col s3">
+          <label for="id_question_10_0">{% trans "Is curious about many different things" %}</label>
+          <p class="range-field">
+          <input type="range" id="id_question_10" name="question_10" min="1" max="5" step="1" />
+          </p>
+          </div>
+          
+          <div class="col s3">
+          <label for="id_question_11_0">{% trans "Is full of energy" %}</label>
+          <p class="range-field">
+          <input type="range" id="id_question_11" name="question_11" min="1" max="5" step="1" />
+          </p>
+          </div>
+          
+          <div class="col s3">
+          <label for="id_question_12_0">{% trans "Starts quarrels with others" %}</label>
+          <p class="range-field">
+          <input type="range" id="id_question_12" name="question_12" min="1" max="5" step="1" />
+          </p>
+          </div>
+          </div>
+          
+          <div class="row">
+          <div class="col s3">
+          <label for="id_question_13_0">{% trans "Is a reliable worker" %}</label>
+          <p class="range-field">
+          <input type="range" id="id_question_13" name="question_13" min="1" max="5" step="1" />
+          </p>
+          </div>
+          
+          <div class="col s3">
+          <label for="id_question_14_0">{% trans "Can be tense" %}</label>
+          <p class="range-field">
+          <input type="range" id="id_question_14" name="question_14" min="1" max="5" step="1" />
+          </p>
+          </div>
+          
+          <div class="col s3">
+          <label for="id_question_15_0">{% trans "Is ingenious, a deep thinker" %}</label>
+          <p class="range-field">
+          <input type="range" id="id_question_15" name="question_15" min="1" max="5" step="1" />
+          </p>
+          </div>
+          
+          <div class="col s3">
+          <label for="id_question_16_0">{% trans "Generates a lot of enthusiasm" %}</label>
+          <p class="range-field">
+          <input type="range" id="id_question_16" name="question_16" min="1" max="5" step="1" />
+          </p>
+          </div>
+          </div>
+          
+          <div class="row">
+          <div class="col s3">
+          <label for="id_question_17_0">{% trans "Has a forgiving nature" %}</label>
+          <p class="range-field">
+          <input type="range" id="id_question_17" name="question_17" min="1" max="5" step="1" />
+          </p>
+          </div>
+          
+          <div class="col s3">
+          <label for="id_question_18_0">{% trans "Tends to be disorganized" %}</label>
+          <p class="range-field">
+          <input type="range" id="id_question_18" name="question_18" min="1" max="5" step="1" />
+          </p>
+          </div>
+          
+          <div class="col s3">
+          <label for="id_question_19_0">{% trans "Worries a lot" %}</label>
+          <p class="range-field">
+          <input type="range" id="id_question_19" name="question_19" min="1" max="5" step="1" />
+          </p>
+          </div>
+          
+          <div class="col s3">
+          <label for="id_question_20_0">{% trans "Has an active imagination" %}</label>
+          <p class="range-field">
+          <input type="range" id="id_question_20" name="question_20" min="1" max="5" step="1" />
+          </p>
+          </div>
+          </div>
+          
+          <div class="row">
+          <div class="col s3">
+          <label for="id_question_21_0">{% trans "Tends to be quiet" %}</label>
+          <p class="range-field">
+          <input type="range" id="id_question_21" name="question_21" min="1" max="5" step="1" />
+          </p>
+          </div>
+          
+          <div class="col s3">
+          <label for="id_question_22_0">{% trans "Is generally trusting" %}</label>
+          <p class="range-field">
+          <input type="range" id="id_question_22" name="question_22" min="1" max="5" step="1" />
+          </p>
+          </div>
+          
+          <div class="col s3">
+          <label for="id_question_23_0">{% trans "Tends to be lazy" %}</label><p class="range-field">
+          <input type="range" id="id_question_23" name="question_23" min="1" max="5" step="1" />
+          </p>
+          </div>
+          
+          <div class="col s3">
+          <label for="id_question_24_0">{% trans "Is emotionally stable, not easily upset" %}</label>
+          <p class="range-field">
+          <input type="range" id="id_question_24" name="question_24" min="1" max="5" step="1" />
+          </p>
+          </div>
+          </div>
+          
+          <div class="row">
+          <div class="col s3">
+          <label for="id_question_25_0">{% trans "Is inventive" %}</label>
+          <p class="range-field">
+          <input type="range" id="id_question_25" name="question_25" min="1" max="5" step="1" />
+          </p>
+          </div>
+          
+          <div class="col s3">
+          <label for="id_question_26_0">{% trans "Has an assertive personality" %}</label>
+          <p class="range-field">
+          <input type="range" id="id_question_26" name="question_26" min="1" max="5" step="1" />
+          </p>
+          </div>
+          
+          <div class="col s3">
+          <label for="id_question_27_0">{% trans "Can be cold and aloof" %}</label>
+          <p class="range-field">
+          <input type="range" id="id_question_27" name="question_27" min="1" max="5" step="1" />
+          </p>
+          </div>
+          
+          <div class="col s3">
+          <label for="id_question_28_0">{% trans "Perseveres until the task is finished" %}</label>
+          <p class="range-field">
+          <input type="range" id="id_question_28" name="question_28" min="1" max="5" step="1" />
+          </p>
+          </div>
+          
+          <div class="row">
+          <div class="col s3">
+          <label for="id_question_29_0">{% trans "Can be moody" %}</label>
+          <p class="range-field">
+          <input type="range" id="id_question_29" name="question_29" min="1" max="5" step="1" />
+          </p>
+          </div>
+          
+          <div class="col s3">
+          <label for="id_question_30_0">{% trans "Values artistic, aesthetic experiences" %}</label>
+          <p class="range-field">
+          <input type="range" id="id_question_30" name="question_30" min="1" max="5" step="1" />
+          </p>
+          </div>
+          
+          <div class="col s3">
+          <label for="id_question_31_0">{% trans "Is sometimes shy, inhibited" %}</label>
+          <p class="range-field">
+          <input type="range" id="id_question_31" name="question_31" min="1" max="5" step="1" />
+          </p>
+          </div>
+          
+          <div class="col s3">
+          <label for="id_question_32_0">{% trans "Is considerate and kind to almost everyone" %}</label>
+          <p class="range-field">
+          <input type="range" id="id_question_32" name="question_32" min="1" max="5" step="1" />
+          </p>
+          </div>
+          </div>
+          
+          <div class="row">
+          <div class="col s3">
+          <label for="id_question_33_0">{% trans "Does things efficiently" %}</label>
+          <p class="range-field">
+          <input type="range" id="id_question_33" name="question_33" min="1" max="5" step="1" />
+          </p>
+          </div>
+          
+          <div class="col s3">
+          <label for="id_question_34_0">{% trans "Remains calm in tense situations" %}</label>
+          <p class="range-field">
+          <input type="range" id="id_question_34" name="question_34" min="1" max="5" step="1" />
+          </p>
+          </div>
+          
+          <div class="col s3">
+          <label for="id_question_35_0">{% trans "Prefers work that is routine" %}</label><p class="range-field">
+          <input type="range" id="id_question_35" name="question_35" min="1" max="5" step="1" />
+          </p>
+          </div>
+          
+          <div class="col s3">
+          <label for="id_question_36_0">{% trans "Is outgoing, sociable" %}</label>
+          <p class="range-field">
+          <input type="range" id="id_question_36" name="question_36" min="1" max="5" step="1" />
+          </p>
+          </div>
+          </div>
+          
+          <div class="row">
+          <div class="col s3">
+          <label for="id_question_37_0">{% trans "Is sometimes rude to others" %}</label>
+          <p class="range-field">
+          <input type="range" id="id_question_37" name="question_37" min="1" max="5" step="1" />
+          </p>
+          </div>
+          
+          <div class="col s3">
+          <label for="id_question_38_0">{% trans "Makes plans and follows them" %}</label>
+          <p class="range-field">
+          <input type="range" id="id_question_38" name="question_38" min="1" max="5" step="1" />
+          </p>
+          </div>
+          
+          <div class="col s3">
+          <label for="id_question_39_0">{% trans "Gets nervous easily" %}</label>
+          <p class="range-field">
+          <input type="range" id="id_question_39" name="question_39" min="1" max="5" step="1" />
+          </p>
+          </div>
+          
+          <div class="col s3">
+          <label for="id_question_40_0">{% trans "Likes to reflect, play with ideas" %}</label>
+          <p class="range-field">
+          <input type="range" id="id_question_40" name="question_40" min="1" max="5" step="1" />
+          </p>
+          </div>
+          </div>
+          
+          <div class="row">
+          <div class="col s3">
+          <label for="id_question_41_0">{% trans "Has few artistic interests" %}</label>
+          <p class="range-field">
+          <input type="range" id="id_question_41" name="question_41" min="1" max="5" step="1" />
+          </p>
+          </div>
+          
+          <div class="col s3">
+          <label for="id_question_42_0">{% trans "Likes to cooperate with others" %}</label>
+          <p class="range-field">
+          <input type="range" id="id_question_42" name="question_42" min="1" max="5" step="1" />
+          </p>
+          </div>
+          
+          <div class="col s3">
+          <label for="id_question_43_0">{% trans "Is easily distracted" %}</label>
+          <p class="range-field">
+          <input type="range" id="id_question_43" name="question_43" min="1" max="5" step="1" />
+          </p>
+          </div>
+          
+          <div class="col s3">
+          <label for="id_question_44_0">{% trans "Is sophisticated in art" %}</label>
+          <p class="range-field">
+          <input type="range" id="id_question_44" name="question_44" min="1" max="5" step="1" />
+          </p>
+          </div>
+          </div>
+          
+          <div class="row">
+          <button id="advancedSubmitButton" class="z-depth-5 btn-large waves-effect waves-light col s4 push-s4 red lighten-1"><i class="large material-icons">send</i></button>
+          <div id="advancedModePreloader" class="row center" style="display: none">
+            <div class="preloader-wrapper active">
+                    <div class="spinner-layer spinner-red-only">
+                      <div class="circle-clipper left">
+                        <div class="circle"></div>
+                      </div><div class="gap-patch">
+                        <div class="circle"></div>
+                      </div><div class="circle-clipper right">
+                        <div class="circle"></div>
+                      </div>
+                    </div>
+                  </div>
+          </div>
+          </div>
+          </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,184 @@
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<link rel="stylesheet" href="/static/css/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.3.1/css/hover-min.css" />
+<link rel="shortcut icon" href="/static/images/favicon.png" />
+<link rel="canonical" href="{% block canonical-url %}https://individualsymphony.com/{{ LANGUAGE_CODE }}{% endblock %}" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.8.1/js/all.js" integrity="sha384-g5uSoOSBd7KkhAMlnQILrecXvzst9TdC09/VM+pjDTCM+1il8RHz5fKANTFFb+gQ" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
+<meta name="author" content="Orçun Özdemir" />
+<meta name="description" content="{% block desc %}{% trans "Music recommendation system based on personality. Explore your inside symphony!" as desc %}{{ desc }}{% endblock %}" />
+<meta property="og:title" content="{% block og-title %}{% trans "Individual Symphony" as site_title %}{{ site_title }} - {% trans "Music Recommendation System Based On Personality" as subtitle %}{{ subtitle }}{% endblock %}" />
+<meta property="og:locale" content="{{ LANGUAGE_CODE }}" />
+<meta property="og:url" content="{% block og-url %}https://individualsymphony.com/{{ LANGUAGE_CODE }}{% endblock %}" />
+<meta property="og:description" content="{% block og-desc %}{% trans "Music recommendation system based on personality. Explore your inside symphony!" %}{% endblock %}" />
+<meta property="og:image" content="{% block og-image %}https://individualsymphony.com/static/images/og_logo.png{% endblock %}" />
+<meta property="og:image:alt" content="{% trans "Individual Symphony" %}" />
+<meta property="og:site_name" content="{% trans "Individual Symphony" %}" />
+<meta property="og:type" content="website" />
+<meta property="fb:app_id" content="2090272431099417" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@individualsymphony" />
+<meta name="twitter:title" content="{% block twitter-title %}{% trans "Individual Symphony" %} - {% trans "Music Recommendation System Based On Personality" %}{% endblock %}" />
+<meta name="twitter:description" content="{% block twitter-desc %}{% trans "Music recommendation system based on personality. Explore your inside symphony!" %}{% endblock %}">
+<meta name="twitter:image" content="https://individualsymphony.com/static/images/og_logo.png" />
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-111993674-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-111993674-4');
+</script>
+<meta name="google-site-verification" content="PVAzMRXni3Y1JUa5wWzo3VdQxi3uEsNIiiRD9dyDw1c" />
+<meta name="msvalidate.01" content="599E86995964193522AB32DE9D9A71B3" />
+<meta name="yandex-verification" content="6ff502cc3cab8d28" />
+<script type="application/ld+json">
+{"name":"{% trans "Individual Symphony" %}",
+"description":"{{ desc }}",
+"author":{"@type":"Person","name":"Orçun Özdemir"},
+"@type":"WebSite",
+"url":"https://individualsymphony.com",
+"publisher":{
+  "@type":"Organization",
+  "logo":{
+    "@type":"ImageObject",
+    "url":"https://individualsymphony.com/static/images/og_logo.png"
+  },
+  "name":"{% trans "Individual Symphony" %}"
+},
+  "headline":"{% trans "Individual Symphony" %}",
+  "sameAs":[
+  "https://facebook.com/individualsymphony",
+  "https://instagram.com/individualsymph",
+  "https://twitter.com/individualsymph"
+  ],
+  "@context":"http://schema.org",
+  "@graph":
+    [
+      {
+        "@context": "https://schema.org",
+        "@type":"SiteNavigationElement",
+        "@id":"#nav-home",
+        "name": "{% trans "Home" %}",
+        "url": "https://individualsymphony.com"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type":"SiteNavigationElement",
+        "@id":"#nav-about",
+        "name": "{% trans "About" %}",
+        "url": "https://individualsymphony.com/about"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type":"SiteNavigationElement",
+        "@id":"#nav-whitepaper",
+        "name": "{% trans "Whitepaper" %}",
+        "url": "https://individualsymphony.com/whitepaper"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type":"SiteNavigationElement",
+        "@id":"#nav-changelog",
+        "name": "{% trans "Changelog" %}",
+        "url": "https://individualsymphony.com/changelog"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type":"SiteNavigationElement",
+        "@id":"#nav-contact",
+        "name": "{% trans "Contact" %}",
+        "url": "https://individualsymphony.com/contact"
+      }
+    ]
+}
+</script>
+{% block ext-js %}{% endblock %}
+<script>
+$(document).ready(function(){
+    $('.sidenav').sidenav();
+    $(".dropdown-trigger").dropdown();
+});
+{% block script %}{% endblock %}
+</script>
+<style>
+{% block custom-css %}{% endblock %}
+</style>
+<title>{% block title %}{{ site_title }} - {{ subtitle }}{% endblock %}</title>
+</head>
+<body>
+  <header>
+    <ul id="dropdown-lang" class="dropdown-content red lighten-1">
+        <li><a id="en-lang" class="center" style="color: white" href="/language?translate=en"><span style="font-size: 1em" class="red lighten-1">🇬🇧<br>{% trans "English" as english %}{{ english }}</span></a></li>
+        <li><a id="tr-lang" class="center" style="color: white" href="/language?translate=tr"><span style="font-size: 1em" class="red lighten-1">🇹🇷<br>{% trans "Turkish" as turkish %}{{ turkish }}</span></a></li>
+      </ul>
+      <ul id="dropdown-lang-mobile" class="dropdown-content red lighten-1">
+          <li><a id="en-lang" style="color: white" href="/language?translate=en"><span style="font-size: 1em" class="new badge red lighten-1" data-badge-caption="🇬🇧 {{ english }}"></span></a></li>
+          <li><a id="tr-lang" style="color: white" href="/language?translate=tr"><span style="font-size: 1em" class="new badge red lighten-1" data-badge-caption="🇹🇷 {{ turkish }}"></span></a></li>
+        </ul>
+  <nav class="red lighten-1">
+        <div class="nav-wrapper">
+          <a href="/" class="brand-logo"><i style="font-size: 5rem" class="large material-icons">queue_music</i></a>
+          <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+          <ul class="right hide-on-med-and-down">
+            <li><a id="nav-home" href="/"><i class="material-icons left">home</i>{% trans "Home" as home %}{{ home }}</a></li>
+            <li><a id="nav-about" href="/about"><i class="material-icons left">subject</i>{% trans "About" as about %}{{ about }}</a></li>
+            <li><a id="nav-whitepaper" href="/whitepaper"><i class="material-icons left">filter_none</i>{% trans "Whitepaper" as whitepaper %}{{ whitepaper }}</a></li>
+            <li><a id="nav-references" href="/references"><i class="material-icons left">collections_bookmark</i>{% trans "References" as references %}{{ references }}</a></li>
+            <li><a id="nav-changelog" href="/changelog"><i class="material-icons left">layers</i>{% trans "Changelog" as changelog %}{{ changelog }}</a></li>
+            <li><a id="nav-contact" href="/contact"><i class="material-icons left">forum</i>{% trans "Contact" as contact %}{{ contact }}</a></li>
+            <li><a class="dropdown-trigger" href="#!" data-target="dropdown-lang">{% trans "Languages" %}<i class="material-icons left">language</i></a></li>
+          </ul>
+        </div>
+      </nav>
+    
+      <ul class="sidenav red lighten-1" id="mobile-demo">
+        <li><a class="white-text" href="/"><i class="white-text material-icons">home</i>{{ home }}</a></li>
+        <li><a class="white-text" href="/about"><i class="white-text material-icons">subject</i>{{ about }}</a></li>
+        <li><a class="white-text" href="/whitepaper"><i class="white-text material-icons">filter_none</i>{{ whitepaper }}</a></li>
+        <li><a class="white-text" href="/references"><i class="white-text material-icons">collections_bookmark</i>{{ references }}</a></li>
+        <li><a class="white-text" href="/changelog"><i class="white-text material-icons">layers</i>{{ changelog }}</a></li>
+        <li><a class="white-text" href="/contact"><i class="white-text material-icons">forum</i>{{ contact }}</a></li>
+        <li><a class="dropdown-trigger white-text" href="#!" data-target="dropdown-lang-mobile">{% trans "Languages" %}<i class="white-text material-icons left">language</i></a></li>
+      </ul>
+    </header>
+      <main>
+        <div id="container" class="container center">
+        {% block cover_photo_up %}{% endblock %}
+        {% block h1 %}<h1></h1>{% endblock %}
+        {% block cover_photo_bottom %}{% endblock %}
+        {% block description %}{% endblock %}
+        {% block content %}{% endblock %}
+        </div>
+      </main>
+
+    <footer style="margin-top: 2rem; bottom:0; left:0; width:100%; z-index: 15" class="page-footer red lighten-1">
+            <div class="footer-copyright red lighten-1">
+                <div class="container center">
+                  <div class="row">
+                      <a href="https://facebook.com/individualsymphony" id="social-buttons" target="_blank" style="margin-right: 10px" class="hvr-icon-bounce"><i class="hvr-icon fab fa-facebook"></i></a>
+                      <a href="https://twitter.com/individualsymph" id="social-buttons" target="_blank" style="margin-right: 10px" class="hvr-icon-bounce"><i class="hvr-icon fab fa-twitter"></i></a>
+                      <a href="https://instagram.com/individualsymph" id="social-buttons" target="_blank" class="hvr-icon-bounce"><i class="hvr-icon fab fa-instagram"></i></a>
+                  </div>
+                  <div class="row">
+                    <img class="responsive-img" title="Creative Commons" alt="Creative Commons" style="max-width: 25px; max-height: 25px;" src="/static/images/cc.svg">
+                    <img class="responsive-img" title="Attribution" alt="Attribution" style="max-width: 25px; max-height: 25px;" src="/static/images/by.svg">
+                    <img class="responsive-img" title="Share" alt="Share" style="max-width: 25px; max-height: 25px;" src="/static/images/share.svg">
+                    <br>
+                    {% trans "This work is licensed under a Creative Commons Attribution 4.0 International License." %}
+                  </div>
+                </div>
+            </div>
+    </footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>

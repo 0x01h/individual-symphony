@@ -1,0 +1,986 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-08-03 09:19+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: individualsymphony/templates/individualsymphony/about.html:4
+#: individualsymphony/templates/individualsymphony/about.html:9
+#: individualsymphony/templates/individualsymphony/about.html:11
+msgid "About - Individual Symphony"
+msgstr "Hakkında - Kişisel Senfoni"
+
+#: individualsymphony/templates/individualsymphony/about.html:5
+#: individualsymphony/templates/individualsymphony/about.html:6
+#: individualsymphony/templates/individualsymphony/about.html:10
+msgid ""
+"This project is aimed to provide a music recommendation system that "
+"recommend songs based on people's personalities."
+msgstr ""
+"Bu proje insanların kişiliklerine göre onlara müzik öneren bir müzik öneri "
+"sistemi oluşturmayı amaçlamaktadır."
+
+#: individualsymphony/templates/individualsymphony/about.html:12
+#: individualsymphony/templates/individualsymphony/base.html:78
+#: individualsymphony/templates/individualsymphony/base.html:134
+msgid "About"
+msgstr "Hakkında"
+
+#: individualsymphony/templates/individualsymphony/about.html:14
+msgid ""
+"\n"
+"<p>This project is aimed to provide a <strong>music recommendation system</"
+"strong> that recommend songs based on people's personalities. \n"
+"    Big five personality traits (five factor model <strong>(FFM)</strong> or "
+"<strong>OCEAN</strong> model) are useful when studying on psychological "
+"identities. \n"
+"    Therefore, some academic researches and surveys on correlations between "
+"musical taste (mainly genres) and big five personality traits are heavily "
+"used in this project. <p>Spotify API integrated with recommendation system "
+"to maintain artists, albums, songs, and significant audio features to create "
+"a deep learning model which classifies songs regarding to their genres. "
+"Additionly, recommendation system accepts feedbacks from participants if "
+"recommended songs are not relevant in matter of musical taste, participants "
+"are able to send their genre preferences to improve model predictions.</p> "
+"<p>Python, Django, PostgreSQL, TensorFlow, Keras, numpy, pandas, scikit-"
+"learn, MaterializeCSS, and many other technologies are used in development "
+"phase.</p> <p>Developed during graduation thesis by <b>Orçun Özdemir</b> in "
+"<b>Istanbul Technical University</b> and licensed under a Creative Commons "
+"Attribution 4.0 International License.</p>\n"
+msgstr ""
+"\n"
+"<p>Bu proje insanlara kişiliklerine göre müzik önerisinde bulunan bir müzik "
+"öneri sistemi kurmayı amaçlamaktadır. Beş büyük kişilik özelliği (beş faktör "
+"modeli <strong>FFM</strong> veya <strong>OCEAN</strong> model) psikolojik "
+"kişilikler üzerine çalışılırken yararlanılan güvenilir bir modeldir. Müzikal "
+"tür (janr) ve beş büyük kişilik özelliği modeli arasındaki korelasyonu "
+"belirten ve bunlar üzerine insanlarla anketler yapmış akademik çalışmalar bu "
+"projede bolca kullanılmıştır. \n"
+"Parçalar ve özellikler çekilirken Spotify API'ı kullanılmıştır ve toplanan "
+"sanatçılar, albümler, parçalar bir araya getirilerek tür (janr) ayrıştırması "
+"yapan bir derin öğrenme modeli geliştirilmiştir. Bunun harici sistem "
+"katılımcılardan beğenmediği parçaları ve sevdikleri türleri puansal olarak "
+"alarak bu geri bildirimler sonucu modelin tahminlerini daha doğru hale "
+"getirmek için kendini geliştirmektedir.<p>Python, Django, PostgreSQL, "
+"TensorFlow, Keras, numpy, pandas, scikit-learn, MaterializeCSS ve birçok "
+"başka teknolojiler geliştirme aşamasında kullanılmıştır.</p> <p><b>Orçun "
+"Özdemir</b> tarafından <b>İstanbul Teknik Üniversitesi</b> bilgisayar "
+"mühendisliği bölümü için bitirme projesi olarak geliştirilmiştir ve Creative "
+"Commons 4.0 uluslararası lisansıyla lisanslanmıştır.</p>\n"
+
+#: individualsymphony/templates/individualsymphony/about.html:21
+msgid "Support to maintain, all donations are welcome!"
+msgstr "Geliştirilmesi için bağış yaparak destekleyebilirsiniz!"
+
+#: individualsymphony/templates/individualsymphony/base.html:19
+#: individualsymphony/templates/individualsymphony/base.html:23
+#: individualsymphony/templates/individualsymphony/base.html:32
+msgid ""
+"Music recommendation system based on personality. Explore your inside "
+"symphony!"
+msgstr "Kişilik tabanlı müzik öneri sistemi. İçinizdeki senfoniyi keşfedin!"
+
+#: individualsymphony/templates/individualsymphony/base.html:20
+#: individualsymphony/templates/individualsymphony/base.html:25
+#: individualsymphony/templates/individualsymphony/base.html:26
+#: individualsymphony/templates/individualsymphony/base.html:31
+#: individualsymphony/templates/individualsymphony/base.html:45
+#: individualsymphony/templates/individualsymphony/base.html:56
+#: individualsymphony/templates/individualsymphony/base.html:58
+#: individualsymphony/templates/individualsymphony/home.html:84
+msgid "Individual Symphony"
+msgstr "Kişisel Senfoni"
+
+#: individualsymphony/templates/individualsymphony/base.html:20
+#: individualsymphony/templates/individualsymphony/base.html:31
+#: individualsymphony/templates/individualsymphony/home.html:84
+msgid "Music Recommendation System Based On Personality"
+msgstr "Kişilik Tabanlı Müzik Öneri Sistemi"
+
+#: individualsymphony/templates/individualsymphony/base.html:71
+#: individualsymphony/templates/individualsymphony/base.html:133
+msgid "Home"
+msgstr "Anasayfa"
+
+#: individualsymphony/templates/individualsymphony/base.html:85
+#: individualsymphony/templates/individualsymphony/base.html:135
+#: individualsymphony/templates/individualsymphony/whitepaper.html:12
+msgid "Whitepaper"
+msgstr "Tez"
+
+#: individualsymphony/templates/individualsymphony/base.html:92
+#: individualsymphony/templates/individualsymphony/base.html:137
+#: individualsymphony/templates/individualsymphony/changelog.html:22
+msgid "Changelog"
+msgstr "Versiyonlar"
+
+#: individualsymphony/templates/individualsymphony/base.html:99
+#: individualsymphony/templates/individualsymphony/base.html:138
+#: individualsymphony/templates/individualsymphony/contact.html:12
+msgid "Contact"
+msgstr "İletişim"
+
+#: individualsymphony/templates/individualsymphony/base.html:121
+msgid "English"
+msgstr "İngilizce"
+
+#: individualsymphony/templates/individualsymphony/base.html:122
+msgid "Turkish"
+msgstr "Türkçe"
+
+#: individualsymphony/templates/individualsymphony/base.html:136
+#: individualsymphony/templates/individualsymphony/references.html:11
+msgid "References"
+msgstr "Atıflar"
+
+#: individualsymphony/templates/individualsymphony/base.html:139
+#: individualsymphony/templates/individualsymphony/base.html:151
+msgid "Languages"
+msgstr "Diller"
+
+#: individualsymphony/templates/individualsymphony/base.html:177
+msgid ""
+"This work is licensed under a Creative Commons Attribution 4.0 International "
+"License."
+msgstr "Bu proje Creative Commons 4.0 uluslararası lisansıyla lisanslanmıştır."
+
+#: individualsymphony/templates/individualsymphony/changelog.html:4
+#: individualsymphony/templates/individualsymphony/changelog.html:9
+#: individualsymphony/templates/individualsymphony/changelog.html:21
+msgid "Changelog - Individual Symphony"
+msgstr "Versiyonlar - Kişisel Senfoni"
+
+#: individualsymphony/templates/individualsymphony/changelog.html:5
+#: individualsymphony/templates/individualsymphony/changelog.html:6
+#: individualsymphony/templates/individualsymphony/changelog.html:10
+msgid ""
+"This page intends to show versions and changes on Individual Symphony "
+"software."
+msgstr ""
+"Bu sayfa Kişisel Senfoni'nin versiyonlarını ve değişimlerini göstermek için "
+"hazırlanmıştır."
+
+#: individualsymphony/templates/individualsymphony/changelog.html:24
+msgid ""
+"\n"
+"<div class=\"row\">\n"
+"<div class=\"col s8 offset-s2\">\n"
+"<ul class=\"collapsible\">\n"
+"    <li class=\"active\">\n"
+"        <div class=\"collapsible-header center\" style=\"display: block\"><i "
+"class=\"material-icons\">info_outline</i>Version: 0.3.2<br><i class="
+"\"material-icons\">today</i>Date: 02.08.2019</div>\n"
+"        <div class=\"collapsible-body\"><span>\n"
+"            Improvements on UI.\n"
+"            Add final report, presentation and publish source code.\n"
+"        </span></div>\n"
+"    </li>\n"
+"    <li>\n"
+"        <div class=\"collapsible-header center\" style=\"display: block\"><i "
+"class=\"material-icons\">info_outline</i>Version: 0.3.1<br><i class="
+"\"material-icons\">today</i>Date: 04.06.2019</div>\n"
+"        <div class=\"collapsible-body\"><span>\n"
+"            Add song genre suggestion feedback system.\n"
+"        </span></div>\n"
+"      </li>\n"
+"    <li>\n"
+"        <div class=\"collapsible-header center\" style=\"display: block\"><i "
+"class=\"material-icons\">info_outline</i>Version: 0.3.0<br><i class="
+"\"material-icons\">today</i>Date: 22.04.2019</div>\n"
+"        <div class=\"collapsible-body\"><span>\n"
+"          Improvements on genre predictions.<br>\n"
+"          KNN implementation for better matching algorithm.\n"
+"        </span></div>\n"
+"      </li>\n"
+"    <li>\n"
+"        <div class=\"collapsible-header center\" style=\"display: block\"><i "
+"class=\"material-icons\">info_outline</i>Version: 0.2.2<br><i class="
+"\"material-icons\">today</i>Date: 15.04.2019</div>\n"
+"        <div class=\"collapsible-body\"><span>\n"
+"          Improvements on deep learning model.<br>\n"
+"          New logo and graphics.<br>\n"
+"          Improvements on UI and UX.<br>\n"
+"          Fixes on some JS and recommendation bugs.\n"
+"        </span></div>\n"
+"      </li>\n"
+"    <li>\n"
+"      <div class=\"collapsible-header center\" style=\"display: block\"><i "
+"class=\"material-icons\">info_outline</i>Version: 0.2.1<br><i class="
+"\"material-icons\">today</i>Date: 11.04.2019</div>\n"
+"      <div class=\"collapsible-body\"><span>\n"
+"        Turkish language support.<br>\n"
+"        Improvements on UX.\n"
+"      </span></div>\n"
+"    </li>\n"
+"    <li>\n"
+"      <div class=\"collapsible-header center\" style=\"display: block\"><i "
+"class=\"material-icons\">info_outline</i>Version: 0.2.0<br><i class="
+"\"material-icons\">today</i>Date: 02.04.2019</div>\n"
+"      <div class=\"collapsible-body\"><span>\n"
+"        Improvements on design, theme, and colors.<br>\n"
+"        Update on internal API.<br>\n"
+"        Update on deep learning model for more accuracy.<br>\n"
+"        New artists, albums, and songs to database.<br>\n"
+"        Main open graph tags and meta tags for social media.\n"
+"      </span></div>\n"
+"    </li>\n"
+"    <li>\n"
+"      <div class=\"collapsible-header center\" style=\"display: block\"><i "
+"class=\"material-icons\">info_outline</i>Version: 0.1.0<br><i class="
+"\"material-icons\">today</i>Date: 12.03.2019</div>\n"
+"      <div class=\"collapsible-body\"><span>Things are generally expected to "
+"work but anything can break with any upgrade.</span></div>\n"
+"    </li>\n"
+"  </ul>\n"
+"</div>\n"
+"</div>\n"
+msgstr ""
+"\n"
+"<div class=\"row\">\n"
+"<div class=\"col s8 offset-s2\">\n"
+"<ul class=\"collapsible\">\n"
+"    <li class=\"active\">\n"
+"        <div class=\"collapsible-header center\" style=\"display: block\"><i "
+"class=\"material-icons\">info_outline</i>Versiyon: 0.3.2<br><i class="
+"\"material-icons\">today</i>Tarih: 02.08.2019</div>\n"
+"        <div class=\"collapsible-body\"><span>\n"
+"            Önyüzde geliştirme.\n"
+"            Rapor ve sunum eklendi, kaynak kod yayınlandı.\n"
+"        </span></div>\n"
+"    </li>\n"
+"    <li>\n"
+"        <div class=\"collapsible-header center\" style=\"display: block\"><i "
+"class=\"material-icons\">info_outline</i>Versiyon: 0.3.1<br><i class="
+"\"material-icons\">today</i>Tarih: 04.06.2019</div>\n"
+"        <div class=\"collapsible-body\"><span>\n"
+"            Parçalar için tür geri bildirim öneri sistemi entegresi.\n"
+"        </span></div>\n"
+"      </li>\n"
+"    <li>\n"
+"        <div class=\"collapsible-header center\" style=\"display: block\"><i "
+"class=\"material-icons\">info_outline</i>Versiyon: 0.3.0<br><i class="
+"\"material-icons\">today</i>Tarih: 22.04.2019</div>\n"
+"        <div class=\"collapsible-body\"><span>\n"
+"          Tür tahminlerinde iyileştirme.<br>\n"
+"          Daha iyi eşleştirme sistemi için KNN implementasyonu.\n"
+"        </span></div>\n"
+"      </li>\n"
+"    <li>\n"
+"      <div class=\"collapsible-header center\" style=\"display: block\"><i "
+"class=\"material-icons\">info_outline</i>Versiyon: 0.2.2<br><i class="
+"\"material-icons\">today</i>Tarih: 15.04.2019</div>\n"
+"        <div class=\"collapsible-body\"><span>\n"
+"          Derin öğrenme modeli için geliştirmeler.<br>\n"
+"          Yeni logo ve grafikler.<br>\n"
+"          Kullanıcı deneyimi ve arayüz geliştirmesi.<br>\n"
+"          Bazı JS ve öneri hatalarının düzeltilmesi.\n"
+"        </span></div>\n"
+"      </li>\n"
+"    <li>\n"
+"      <div class=\"collapsible-header center\" style=\"display: block\"><i "
+"class=\"material-icons\">info_outline</i>Versiyon: 0.2.1<br><i class="
+"\"material-icons\">today</i>Tarih: 11.04.2019</div>\n"
+"      <div class=\"collapsible-body\"><span>\n"
+"        Türkçe dil desteği.<br>\n"
+"        Kullanıcı deneyimi için iyileştirme.\n"
+"      </span></div>\n"
+"    </li>\n"
+"    <li>\n"
+"      <div class=\"collapsible-header center\" style=\"display: block\"><i "
+"class=\"material-icons\">info_outline</i>Versiyon: 0.2.0<br><i class="
+"\"material-icons\">today</i>Tarih: 02.04.2019</div>\n"
+"      <div class=\"collapsible-body\"><span>\n"
+"        Tasarım, tema ve renklerde iyileştirme.<br>\n"
+"        İç API'da güncelleme.<br>\n"
+"        Derin öğrenme modelinde daha yüksek doğruluk için güncelleme.<br>\n"
+"        Veritabanına yeni sanatçı, albüm ve parça ekleme.<br>\n"
+"        OG etiketleri ve sosyal medya etiketleri ekleme.\n"
+"      </span></div>\n"
+"    </li>\n"
+"    <li>\n"
+"      <div class=\"collapsible-header center\" style=\"display: block\"><i "
+"class=\"material-icons\">info_outline</i>Versiyon: 0.1.0<br><i class="
+"\"material-icons\">today</i>Tarih: 12.03.2019</div>\n"
+"      <div class=\"collapsible-body\"><span>Çoğu özellik çalışıyor ama "
+"herhangi bir güncellemeyle işler değişebilir.</span></div>\n"
+"    </li>\n"
+"  </ul>\n"
+"</div>\n"
+"</div>\n"
+
+#: individualsymphony/templates/individualsymphony/contact.html:4
+#: individualsymphony/templates/individualsymphony/contact.html:9
+#: individualsymphony/templates/individualsymphony/contact.html:11
+msgid "Contact - Individual Symphony"
+msgstr "İletişim - Kişisel Senfoni"
+
+#: individualsymphony/templates/individualsymphony/contact.html:5
+#: individualsymphony/templates/individualsymphony/contact.html:6
+#: individualsymphony/templates/individualsymphony/contact.html:10
+msgid ""
+"You can find me on GitHub and LinkedIn, also if you like to send an e-mail, "
+"do not hesitate to contact!"
+msgstr ""
+"Beni GitHub ve LinkedIn'de bulabilirsiniz ya da e-posta ile ulaşabilirsiniz. "
+"Yazmaktan çekinmeyin!"
+
+#: individualsymphony/templates/individualsymphony/contact.html:15
+msgid ""
+"\n"
+"<p>You can find me on \n"
+"<a href=\"https://github.com/0x01h\" target=\"_blank\">GitHub <i class=\"fab "
+"fa-github\"></i></a> and <a href=\"https://linkedin.com/in/orçunözdemir\" "
+"target=\"_blank\">LinkedIn <i class=\"fab fa-linkedin\"></i></a>, also if "
+"you like to send an e-mail, do not hesitate to <strong>contact!</strong></"
+"p>\n"
+msgstr ""
+"\n"
+"<p>Beni \n"
+"<a href=\"https://github.com/0x01h\" target=\"_blank\">GitHub <i class=\"fab "
+"fa-github\"></i></a> ve <a href=\"https://linkedin.com/in/orçunözdemir\" "
+"target=\"_blank\">LinkedIn <i class=\"fab fa-linkedin\"></i></a>'de "
+"bulabilirsiniz ya da e-posta ile ulaşabilirsiniz. Yazmaktan "
+"<strong>çekinmeyin!</strong></p>\n"
+
+#: individualsymphony/templates/individualsymphony/home.html:36
+#: individualsymphony/templates/individualsymphony/home.html:130
+#: individualsymphony/templates/individualsymphony/results.html:424
+msgid "Openness"
+msgstr "Açıklık"
+
+#: individualsymphony/templates/individualsymphony/home.html:37
+msgid ""
+"Appreciation for art, emotion, adventure, unusual ideas, curiosity, and "
+"variety of experience."
+msgstr ""
+"Sanatı takdir, his, macera, sıradışı fikirler, hayal kurma, merak ve çeşitli "
+"deneyimler."
+
+#: individualsymphony/templates/individualsymphony/home.html:39
+msgid "Understand!"
+msgstr "Anladım!"
+
+#: individualsymphony/templates/individualsymphony/home.html:44
+#: individualsymphony/templates/individualsymphony/home.html:136
+#: individualsymphony/templates/individualsymphony/results.html:430
+msgid "Agreeableness"
+msgstr "Uyumluluk"
+
+#: individualsymphony/templates/individualsymphony/home.html:45
+msgid ""
+"Tendency to be compassionate and cooperative rather than suspicious and "
+"antagonistic towards others."
+msgstr "Şüpheli ve zıt olmaktan çok merhametli ve yardıma hazır olmaya eğilim."
+
+#: individualsymphony/templates/individualsymphony/home.html:52
+#: individualsymphony/templates/individualsymphony/home.html:142
+#: individualsymphony/templates/individualsymphony/results.html:448
+msgid "Neuroticism"
+msgstr "Duygusal Dengesizlik"
+
+#: individualsymphony/templates/individualsymphony/home.html:53
+msgid ""
+"Tendency to be prone to psychological stress. The tendency to experience "
+"unpleasant emotions easily, such as anger, anxiety, depression, and "
+"vulnerability."
+msgstr ""
+"Öfke, kaygı, bunalım veya alınganlık gibi tatsız duyguları kolayca yaşama "
+"eğilimi; bazen duygusal dengesizlik olarak da adlandırılır."
+
+#: individualsymphony/templates/individualsymphony/home.html:60
+#: individualsymphony/templates/individualsymphony/home.html:150
+#: individualsymphony/templates/individualsymphony/results.html:442
+msgid "Conscientiousness"
+msgstr "Sorumluluk"
+
+#: individualsymphony/templates/individualsymphony/home.html:61
+msgid ""
+"Tendency to be organized and dependable, show self-discipline, act "
+"dutifully, aim for achievement, and prefer planned rather than spontaneous "
+"behavior."
+msgstr ""
+"Öz disiplin göstermeye yönelim, sorumluluk sahibi olarak hareket etme ve "
+"başarı için azimli olma; kendiliğinden olan yerine planlı hareket etme."
+
+#: individualsymphony/templates/individualsymphony/home.html:68
+#: individualsymphony/templates/individualsymphony/home.html:156
+#: individualsymphony/templates/individualsymphony/results.html:436
+msgid "Extraversion"
+msgstr "Dışadönüklülük"
+
+#: individualsymphony/templates/individualsymphony/home.html:69
+msgid ""
+"Energetic, surgency, assertiveness, sociability and the tendency to seek "
+"stimulation in the company of others, and talkativeness."
+msgstr ""
+"Enerji, olumlu duygular ve diğerlerinin ortaklığını ve teşviğini aramaya "
+"eğilim."
+
+#: individualsymphony/templates/individualsymphony/home.html:76
+#: individualsymphony/templates/individualsymphony/home.html:108
+msgid "Advanced Mode"
+msgstr "Gelişmiş Mod"
+
+#: individualsymphony/templates/individualsymphony/home.html:77
+msgid ""
+"Advanced mode consists 44 questions and takes 10 minutes approximately. "
+"Right side of the slider indicates you strongly agree with assumption, left "
+"side of the slider indicates you strongly disagree, middle of the slider "
+"means that you are neutral or not sure about the answer. Try not to leave "
+"sliders in the middle as much as you can."
+msgstr ""
+"Gelişmiş mod 44 adet soru içerir ve yaklaşık olarak 10 dakika sürer. Cevap "
+"kaydırıcılarının sağ tarafı üstte verilen ifadeyi fazlasıyla kabul "
+"ettiğinizi, sol tarafı fazlasıyla reddettiğinizi, ortası ise kararsız "
+"olduğunuzu belirtir. Mümkün olduğunca ortada bırakmamaya çalışın!"
+
+#: individualsymphony/templates/individualsymphony/home.html:89
+msgid ""
+"\n"
+"<p><span class=\"hvr-buzz\">🎶</span> <strong style=\"font-weight: bold"
+"\">Individual Symphony</strong> is a music recommendation system based on "
+"psychological personalities. Research papers about big five personality and "
+"academic surveys on correlations between personalities and genre interests "
+"are heavily used in this system. Also, a deep learning model classifies "
+"songs by genres using features provided by Spotify API <i style=\"color: "
+"#1ED761\" class=\"hvr-bounce-in fab fa-spotify\"></i>. You can either give "
+"your big five personality values manually in basic mode, or select advanced "
+"mode to let us determine your values. After that you will get your "
+"recommended songs for your unique personal traits. <span style='font-weight: "
+"bold'>It is recommended to use advanced mode for more specific results.</"
+"span> Enjoy, while exploring your inside symphony! <span class=\"hvr-float-"
+"shadow\">👩‍🎤 👨‍🎤</span></p>\n"
+msgstr ""
+"\n"
+"<p><span class=\"hvr-buzz\">🎶</span> <strong style=\"font-weight: bold"
+"\">Kişisel Senfoni</strong>, psikolojik kişilik tabanlı bir müzik öneri "
+"sistemidir. Sistemi oluştururken beş büyük faktör değerleri ile ilgili "
+"akademik makaleler ve bu değerlerin müzikal tür eğilimleri üzerine olan "
+"korelasyon değerleriyle alakalı çalışmalar kullanılmıştır. Parçaları müzikal "
+"türlerine göre ayrıştırmak için <i style=\"color: #1ED761\" class=\"hvr-"
+"bounce-in fab fa-spotify\"></i> Spotify API'ndan gelen değerleri kullanan "
+"bir derin öğrenme modeli arka tarafta çalışmaktadır. Basit modu seçerek en "
+"büyük beş faktör değerlerini elle girebilirsiniz ya da gelişmiş modu seçerek "
+"sorulara verdiğiniz cevaplara göre bu değerlerin belirlenmesini bize "
+"bırakabilirsiniz. Sonrasında kişilik özelliklerinize en iyi uyacak parçalar "
+"size önerilecektir. <span style='font-weight: bold'>Daha size özgü sonuçlar "
+"için gelişmiş modu kullanmanız önerilir. </span> İçinizdeki senfoniyi "
+"keşfederken iyi eğlenceler! <span class=\"hvr-float-shadow\">👩‍🎤 👨‍🎤</span></"
+"p>\n"
+
+#: individualsymphony/templates/individualsymphony/home.html:96
+msgid "Please wait while results are being calculated... 👾"
+msgstr "Sonuçlar hesaplanırken lütfen bekleyin... 👾"
+
+#: individualsymphony/templates/individualsymphony/home.html:105
+msgid "Basic Mode"
+msgstr "Basit Mod"
+
+#: individualsymphony/templates/individualsymphony/home.html:114
+msgid "Big Five Personality Values"
+msgstr "Beş Büyük Kişilik Değeri"
+
+#: individualsymphony/templates/individualsymphony/home.html:120
+msgid "Age Group"
+msgstr "Yaş Grubu"
+
+#: individualsymphony/templates/individualsymphony/home.html:182
+msgid "Tell about yourself: you're someone who..."
+msgstr "Kendinden bahset: sen..."
+
+#: individualsymphony/templates/individualsymphony/home.html:199
+msgid "Is talkative"
+msgstr "Konuşkan"
+
+#: individualsymphony/templates/individualsymphony/home.html:206
+msgid "Tends to find fault with others"
+msgstr "Başkalarında hata bulmaya yatkın"
+
+#: individualsymphony/templates/individualsymphony/home.html:213
+msgid "Does a thorough job"
+msgstr "İşleri layıkıyla yapan"
+
+#: individualsymphony/templates/individualsymphony/home.html:220
+msgid "Is depressed, blue"
+msgstr "Depresif"
+
+#: individualsymphony/templates/individualsymphony/home.html:229
+msgid "Is original, comes up with new ideas"
+msgstr "Özgün, yeni fikirlerle gelen"
+
+#: individualsymphony/templates/individualsymphony/home.html:236
+msgid "Is reserved"
+msgstr "Çok konuşmayan"
+
+#: individualsymphony/templates/individualsymphony/home.html:243
+msgid "Is helpful and unselfish with others"
+msgstr "Yardımsever ve başkalarına karşı bencil olmayan"
+
+#: individualsymphony/templates/individualsymphony/home.html:250
+msgid "Can be somewhat careless"
+msgstr "Bazen umursamaz"
+
+#: individualsymphony/templates/individualsymphony/home.html:259
+msgid "Is relaxed, handles stress well"
+msgstr "Rahat ve stresi kolay yönetebilen"
+
+#: individualsymphony/templates/individualsymphony/home.html:266
+msgid "Is curious about many different things"
+msgstr "Çoğu şey için meraklı"
+
+#: individualsymphony/templates/individualsymphony/home.html:273
+msgid "Is full of energy"
+msgstr "Enerji dolu"
+
+#: individualsymphony/templates/individualsymphony/home.html:280
+msgid "Starts quarrels with others"
+msgstr "Başkalarıyla tartışma başlatan"
+
+#: individualsymphony/templates/individualsymphony/home.html:289
+msgid "Is a reliable worker"
+msgstr "Güvenilir bir çalışan"
+
+#: individualsymphony/templates/individualsymphony/home.html:296
+msgid "Can be tense"
+msgstr "Gergin olabilen"
+
+#: individualsymphony/templates/individualsymphony/home.html:303
+msgid "Is ingenious, a deep thinker"
+msgstr "Derin düşünen"
+
+#: individualsymphony/templates/individualsymphony/home.html:310
+msgid "Generates a lot of enthusiasm"
+msgstr "Hevesli olan"
+
+#: individualsymphony/templates/individualsymphony/home.html:319
+msgid "Has a forgiving nature"
+msgstr "Bağışlayıcı"
+
+#: individualsymphony/templates/individualsymphony/home.html:326
+msgid "Tends to be disorganized"
+msgstr "Dağınık olmaya yatkın"
+
+#: individualsymphony/templates/individualsymphony/home.html:333
+msgid "Worries a lot"
+msgstr "Fazla endişelenen"
+
+#: individualsymphony/templates/individualsymphony/home.html:340
+msgid "Has an active imagination"
+msgstr "Aktif hayal gücüne sahip"
+
+#: individualsymphony/templates/individualsymphony/home.html:349
+msgid "Tends to be quiet"
+msgstr "Sessiz olmaya yatkın"
+
+#: individualsymphony/templates/individualsymphony/home.html:356
+msgid "Is generally trusting"
+msgstr "Genelde güvenen"
+
+#: individualsymphony/templates/individualsymphony/home.html:363
+msgid "Tends to be lazy"
+msgstr "Tembel olmaya yatkın"
+
+#: individualsymphony/templates/individualsymphony/home.html:369
+msgid "Is emotionally stable, not easily upset"
+msgstr "Duygusal olarak sabit, kolay kolay üzülmeyen"
+
+#: individualsymphony/templates/individualsymphony/home.html:378
+msgid "Is inventive"
+msgstr "Yaratıcı"
+
+#: individualsymphony/templates/individualsymphony/home.html:385
+msgid "Has an assertive personality"
+msgstr "İddialı bir kişiliğe sahip"
+
+#: individualsymphony/templates/individualsymphony/home.html:392
+msgid "Can be cold and aloof"
+msgstr "Soğuk ve uzak olabilen"
+
+#: individualsymphony/templates/individualsymphony/home.html:399
+msgid "Perseveres until the task is finished"
+msgstr "Görev bitene kadar direnebilen"
+
+#: individualsymphony/templates/individualsymphony/home.html:407
+msgid "Can be moody"
+msgstr "Ortama uyum sağlayan"
+
+#: individualsymphony/templates/individualsymphony/home.html:414
+msgid "Values artistic, aesthetic experiences"
+msgstr "Sanatsal ve estetik deneyimlere değer veren"
+
+#: individualsymphony/templates/individualsymphony/home.html:421
+msgid "Is sometimes shy, inhibited"
+msgstr "Bazen utangaç ve kısıtlayıcı"
+
+#: individualsymphony/templates/individualsymphony/home.html:428
+msgid "Is considerate and kind to almost everyone"
+msgstr "Düşünceli ve çoğu kişiye karşı kibar"
+
+#: individualsymphony/templates/individualsymphony/home.html:437
+msgid "Does things efficiently"
+msgstr "İşleri verimli yapan"
+
+#: individualsymphony/templates/individualsymphony/home.html:444
+msgid "Remains calm in tense situations"
+msgstr "Zor süreçlerde sakin kalabilen"
+
+#: individualsymphony/templates/individualsymphony/home.html:451
+msgid "Prefers work that is routine"
+msgstr "Düzenli çalışmayı tercih eden"
+
+#: individualsymphony/templates/individualsymphony/home.html:457
+msgid "Is outgoing, sociable"
+msgstr "Dışadönük ve kolay sosyalleşebilen"
+
+#: individualsymphony/templates/individualsymphony/home.html:466
+msgid "Is sometimes rude to others"
+msgstr "Bazen başkalarına karşı kaba olabilen"
+
+#: individualsymphony/templates/individualsymphony/home.html:473
+msgid "Makes plans and follows them"
+msgstr "Planlar yapıp onlara sadık kalan"
+
+#: individualsymphony/templates/individualsymphony/home.html:480
+msgid "Gets nervous easily"
+msgstr "Kolayca endişelenen"
+
+#: individualsymphony/templates/individualsymphony/home.html:487
+msgid "Likes to reflect, play with ideas"
+msgstr "Fikirler bulup onları yansıtmayı seven"
+
+#: individualsymphony/templates/individualsymphony/home.html:496
+msgid "Has few artistic interests"
+msgstr "Sanatsal ilgisi az bulunan"
+
+#: individualsymphony/templates/individualsymphony/home.html:503
+msgid "Likes to cooperate with others"
+msgstr "İşbirliğini seven"
+
+#: individualsymphony/templates/individualsymphony/home.html:510
+msgid "Is easily distracted"
+msgstr "Kolayca dikkati dağılan"
+
+#: individualsymphony/templates/individualsymphony/home.html:517
+msgid "Is sophisticated in art"
+msgstr "Sanat konusunda kültürlü"
+
+#: individualsymphony/templates/individualsymphony/not_found.html:4
+msgid "Not Found! - Individual Symphony"
+msgstr "Bulunamadı! - Kişisel Senfoni"
+
+#: individualsymphony/templates/individualsymphony/not_found.html:5
+#: individualsymphony/templates/individualsymphony/not_found.html:7
+msgid "Not Found!"
+msgstr "Bulunamadı!"
+
+#: individualsymphony/templates/individualsymphony/references.html:3
+#: individualsymphony/templates/individualsymphony/references.html:8
+#: individualsymphony/templates/individualsymphony/references.html:10
+msgid "References - Individual Symphony"
+msgstr "Atıflar - Kişisel Senfoni"
+
+#: individualsymphony/templates/individualsymphony/references.html:4
+#: individualsymphony/templates/individualsymphony/references.html:5
+#: individualsymphony/templates/individualsymphony/references.html:9
+msgid "These references listed below used to create this project."
+msgstr "Bu projeyi yaratırken aşağıda listelenen atıflar kullanılmıştır."
+
+#: individualsymphony/templates/individualsymphony/references.html:13
+msgid ""
+"\n"
+"<p style=\"font-weight: bold\">These references listed below used to create "
+"this project.</p>\n"
+msgstr ""
+"\n"
+"<p style=\"font-weight: bold\">Bu projeyi yaratırken aşağıda listelenen "
+"atıflar kullanılmıştır.</p>\n"
+
+#: individualsymphony/templates/individualsymphony/results.html:47
+#: individualsymphony/templates/individualsymphony/results.html:127
+msgid "Sending... 🔥"
+msgstr "Gönderiliyor... 🔥"
+
+#: individualsymphony/templates/individualsymphony/results.html:52
+#: individualsymphony/templates/individualsymphony/results.html:132
+msgid "Sent! 👍 Undo?"
+msgstr "Gönderildi! 👍 Geri?"
+
+#: individualsymphony/templates/individualsymphony/results.html:57
+#: individualsymphony/templates/individualsymphony/results.html:65
+#: individualsymphony/templates/individualsymphony/results.html:136
+msgid "Sent! 👍"
+msgstr "Gönderildi! 👍"
+
+#: individualsymphony/templates/individualsymphony/results.html:64
+#: individualsymphony/templates/individualsymphony/results.html:145
+msgid "Reverting... 🔥"
+msgstr "Çeviriliyor... 🔥"
+
+#: individualsymphony/templates/individualsymphony/results.html:95
+#: individualsymphony/templates/individualsymphony/results.html:99
+#: individualsymphony/templates/individualsymphony/results.html:358
+msgid "Thank you for your feedback! 💟"
+msgstr "Geri bildirimin için teşekkürler! 💟"
+
+#: individualsymphony/templates/individualsymphony/results.html:104
+msgid "Feedback is successfully reverted! 🔥"
+msgstr "Geri bildirimin başarıyla geri çevrildi! 🔥"
+
+#: individualsymphony/templates/individualsymphony/results.html:105
+#: individualsymphony/templates/individualsymphony/results.html:306
+#: individualsymphony/templates/individualsymphony/results.html:544
+msgid "dissatisfied"
+msgstr "sevmedim"
+
+#: individualsymphony/templates/individualsymphony/results.html:112
+#: individualsymphony/templates/individualsymphony/results.html:182
+msgid ""
+"An error occured! Your session could be expired, try more suggestions button "
+"to refresh your session."
+msgstr ""
+"Bir hata oluştu! Oturumunuz geçersiz olmuş olabilir, daha fazla butonu ile "
+"oturumunuzu yenileyebilirsiniz."
+
+#: individualsymphony/templates/individualsymphony/results.html:115
+#: individualsymphony/templates/individualsymphony/results.html:363
+msgid "An error occured! Status code:"
+msgstr "Bir hata oluştu! Durum kodu:"
+
+#: individualsymphony/templates/individualsymphony/results.html:146
+msgid "Send again?"
+msgstr "Tekrar gönder?"
+
+#: individualsymphony/templates/individualsymphony/results.html:171
+msgid "Genre suggestions are successfully reverted! 🔥"
+msgstr "Tür önerilerin başarıyla geri çevrildi! 🔥"
+
+#: individualsymphony/templates/individualsymphony/results.html:175
+msgid "Thank you for your genre suggestions! 💟"
+msgstr "Tür önerilerin için teşekkürler! 💟"
+
+#: individualsymphony/templates/individualsymphony/results.html:321
+msgid ""
+"Your suggestions have been finished, thank you! Return to home page and try "
+"again for more. 🤖"
+msgstr ""
+"Size özel önerilerin sonuna geldiniz, teşekkürler! Anasayfaya dönün ve daha "
+"fazlası için tekrar deneyin. 🤖"
+
+#: individualsymphony/templates/individualsymphony/results.html:339
+msgid "Please select a genre! 💩"
+msgstr "Lütfen bir müzik türü seçin! 💩"
+
+#: individualsymphony/templates/individualsymphony/results.html:393
+msgid "Results - Individual Symphony"
+msgstr "Sonuçlar - Kişisel Senfoni"
+
+#: individualsymphony/templates/individualsymphony/results.html:397
+msgid "Please wait while results are being processed... 🤔"
+msgstr "Sonuçlar işlenirken lütfen bekleyin... 🤔"
+
+#: individualsymphony/templates/individualsymphony/results.html:411
+msgid "Results"
+msgstr "Sonuçlar"
+
+#: individualsymphony/templates/individualsymphony/results.html:413
+msgid ""
+"\n"
+"<p><span class=\"hvr-backward\">✨</span> Here are your big five personality "
+"analysis and possible genre correlation values some of them may interest "
+"you. You can look at the values by hovering over points in charts. If any "
+"song seems irrelevant to you, please send your feedback. At the bottom of "
+"the page, there is a form for your genre suggestions. <strong style=\"font-"
+"weight: bold\">Don't forget to submit them to us to improve our predictions!"
+"</strong> <span class=\"hvr-forward\">🌌</span></p>\n"
+msgstr ""
+"\n"
+"<p><span class=\"hvr-backward\">✨</span> Beş büyük kişilik değerlerinizin ve "
+"müzikal tür ilgilerinizin bulunduğu grafikler hazırlandı. Grafiklerdeki "
+"noktaların üzerine gelerek değerlerinizi görebilir aşağıdan önerilen "
+"parçalarınıza ulaşabilir en altta da tür ilgilerinizi puanlayarak modelin "
+"iyileştirilmesi için gönderebilirsiniz. <strong style=\"font-weight: bold"
+"\">Önerilen herhangi bir parça size alakasız geldiyse altındaki 'sevmedim' "
+"butonuna basarak geri bildirim göndermeyi unutmayın!</strong> <span class="
+"\"hvr-forward\">🌌</span></p>\n"
+
+#: individualsymphony/templates/individualsymphony/results.html:417
+msgid "Big Five Personality Analysis"
+msgstr "Beş Büyük Faktör Analizi"
+
+#: individualsymphony/templates/individualsymphony/results.html:426
+msgid ""
+"Appreciation for art, emotion, adventure, unusual ideas, curiosity, and "
+"variety of experience. Openness reflects the degree of intellectual "
+"curiosity, creativity and a preference for novelty and variety a person has. "
+"It is also described as the extent to which a person is imaginative or "
+"independent and depicts a personal preference for a variety of activities "
+"over a strict routine. High openness can be perceived as unpredictability or "
+"lack of focus, and more likely to engage in risky behaviour or drug taking."
+msgstr ""
+"Sanatı takdir, his, macera, sıradışı fikirler, hayal kurma, merak ve çeşitli "
+"deneyimler."
+
+#: individualsymphony/templates/individualsymphony/results.html:432
+msgid ""
+"Tendency to be compassionate and cooperative rather than suspicious and "
+"antagonistic towards others. It is also a measure of one's trusting and "
+"helpful nature, and whether a person is generally well-tempered or not. High "
+"agreeableness is often seen as naive or submissive. Low agreeableness "
+"personalities are often competitive or challenging people, which can be seen "
+"as argumentative or untrustworthy."
+msgstr "Şüpheli ve zıt olmaktan çok merhametli ve yardıma hazır olmaya eğilim."
+
+#: individualsymphony/templates/individualsymphony/results.html:438
+msgid ""
+"Energetic, surgency, assertiveness, sociability and the tendency to seek "
+"stimulation in the company of others, and talkativeness. High extraversion "
+"is often perceived as attention-seeking and domineering."
+msgstr ""
+"Enerji, olumlu duygular ve diğerlerinin ortaklığını ve teşviğini aramaya "
+"eğilim."
+
+#: individualsymphony/templates/individualsymphony/results.html:444
+msgid ""
+"Tendency to be organized and dependable, show self-discipline, act "
+"dutifully, aim for achievement, and prefer planned rather than spontaneous "
+"behavior. High conscientiousness is often perceived as being stubborn and "
+"focused. Low conscientiousness is associated with flexibility and "
+"spontaneity, but can also appear as sloppiness and lack of reliability."
+msgstr ""
+"Öz disiplin göstermeye yönelim, sorumluluk sahibi olarak hareket etme ve "
+"başarı için azimli olma; kendiliğinden olan yerine planlı hareket etme."
+
+#: individualsymphony/templates/individualsymphony/results.html:450
+msgid ""
+"Tendency to be prone to psychological stress. The tendency to experience "
+"unpleasant emotions easily, such as anger, anxiety, depression, and "
+"vulnerability. Neuroticism also refers to the degree of emotional stability "
+"and impulse control and is sometimes referred to by its low pole, 'emotional "
+"stability'. High stability manifests itself as a stable and calm "
+"personality, but can be seen as uninspiring and unconcerned. Low stability "
+"manifests as the reactive and excitable personality often found in dynamic "
+"individuals, but can be perceived as unstable or insecure."
+msgstr ""
+"Öfke, kaygı, bunalım veya alınganlık gibi tatsız duyguları kolayca yaşama "
+"eğilimi."
+
+#: individualsymphony/templates/individualsymphony/results.html:458
+msgid "Genre Interest Analysis"
+msgstr "Türlü İlgi Analizi"
+
+#: individualsymphony/templates/individualsymphony/results.html:471
+msgid "Big Five Personality Value"
+msgstr "Beş Büyük Faktör Değeri"
+
+#: individualsymphony/templates/individualsymphony/results.html:507
+msgid "Genre Correlation Value"
+msgstr "Tür Korelasyon Değeri"
+
+#: individualsymphony/templates/individualsymphony/results.html:530
+msgid "Recommended Songs"
+msgstr "Önerilen Parçalar"
+
+#: individualsymphony/templates/individualsymphony/results.html:547
+msgid "info"
+msgstr "bilgi"
+
+#: individualsymphony/templates/individualsymphony/results.html:555
+msgid "Is primary genre prediction of song incorrect?"
+msgstr "Parçanın asıl türü doğru tahmin edilmemiş mi?"
+
+#: individualsymphony/templates/individualsymphony/results.html:558
+msgid "Choose your option"
+msgstr "Bir tür seçin"
+
+#: individualsymphony/templates/individualsymphony/results.html:578
+msgid "Song Genre Suggestion"
+msgstr "Parça Tür Önerisi"
+
+#: individualsymphony/templates/individualsymphony/results.html:581
+msgid "send"
+msgstr "gönder"
+
+#: individualsymphony/templates/individualsymphony/results.html:605
+msgid "more suggestions?"
+msgstr "daha fazla?"
+
+#: individualsymphony/templates/individualsymphony/results.html:625
+msgid ""
+"Help us to understand your genre interests and improve deep learning model "
+"for recommendations in the future!"
+msgstr ""
+"Gelecekteki tahmin ve önerilerimizi daha doğru yapabilmemiz için türlere "
+"olan ilgilerinizi puanlayarak geri bildirimde bulunun ve modelin "
+"geliştirilmesi için bize yardımcı olun!"
+
+#: individualsymphony/templates/individualsymphony/results.html:787
+msgid "Genre Prediction Value"
+msgstr "Tür Korelasyon Değeri"
+
+#: individualsymphony/templates/individualsymphony/something_went_wrong.html:3
+msgid "Something Went Wrong! - Individual Symphony"
+msgstr "Bir Şeyler Yanlış Gitti! - Kişisel Senfoni"
+
+#: individualsymphony/templates/individualsymphony/something_went_wrong.html:4
+#: individualsymphony/templates/individualsymphony/something_went_wrong.html:6
+msgid "Something Went Wrong!"
+msgstr "Bir Şeyler Yanlış Gitti!"
+
+#: individualsymphony/templates/individualsymphony/whitepaper.html:4
+#: individualsymphony/templates/individualsymphony/whitepaper.html:9
+#: individualsymphony/templates/individualsymphony/whitepaper.html:11
+msgid "Whitepaper - Individual Symphony"
+msgstr "Tez - Kişisel Senfoni"
+
+#: individualsymphony/templates/individualsymphony/whitepaper.html:5
+#: individualsymphony/templates/individualsymphony/whitepaper.html:6
+#: individualsymphony/templates/individualsymphony/whitepaper.html:10
+msgid ""
+"This project is planned to be presented as graduation thesis in Istanbul "
+"Technical University in 2019. Final paper and source code will be available "
+"in June, 2019."
+msgstr ""
+"Bu proje İstanbul Teknik Üniversitesi'nde 2019 yılında bitirme projesi "
+"olarak sunulmak üzere hazırlanmıştır. Final tezi and kaynak kodu Haziran "
+"2019'da erişime açılacaktır."
+
+#: individualsymphony/templates/individualsymphony/whitepaper.html:14
+msgid ""
+"<p>This project is planned to be presented as graduation thesis in Istanbul "
+"Technical University in 2019.</p>"
+msgstr ""
+"<p>Bu proje İstanbul Teknik Üniversitesi'nde 2019 yılında bitirme projesi "
+"olarak sunulmak üzere hazırlanmıştır.</p>"
+
+#: individualsymphony/templates/individualsymphony/whitepaper.html:17
+msgid ""
+"\n"
+"    <p>Final paper and source code will be available in June, 2019.</p>\n"
+"    <p><a href=\"/static/documents/final_report.pdf\">Final Report</a></p>\n"
+"    <p><a href=\"/static/documents/presentation.pdf\">Presentation</a></p>\n"
+"    <p><a href=\"https://github.com/0x01h/individual-symphony/\">Source "
+"Code</a></p>\n"
+msgstr ""
+"\n"
+"<p>Final tezi and kaynak kodu Haziran 2019'da erişime açılacaktır.</p>\n"
+"<p><a href=\"/static/documents/final_report.pdf\">Final Tezi</a></p>\n"
+"<p><a href=\"/static/documents/presentation.pdf\">Sunum</a></p>\n"
+"<p><a href=\"https://github.com/0x01h/individual-symphony/\">Kaynak Kodu</"
+"a></p>\n"
+
+#~ msgid "Irrelevant song?"
+#~ msgstr "Alakasız parça?"

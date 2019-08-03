@@ -1,0 +1,8 @@
+{% extends "individualsymphony/base.html" %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% block title %}{% trans "Not Found! - Individual Symphony" %}{% endblock %}
+{% block h1 %}<h1>{% trans "Not Found!" %}</h1>{% endblock %}
+{% block description %}
+<img class="responsive-img" title="{% trans "Not Found!" as not_found %}{{ not_found }}" alt="{{ not_found }}" src="/static/images/not_found.png">
+{% endblock %}

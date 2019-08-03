@@ -1,0 +1,23 @@
+{% extends "individualsymphony/base.html" %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% block og-title %}{% trans "Contact - Individual Symphony" %}{% endblock %}
+{% block desc %}{% trans "You can find me on GitHub and LinkedIn, also if you like to send an e-mail, do not hesitate to contact!" %}{% endblock %}
+{% block og-desc %}{% trans "You can find me on GitHub and LinkedIn, also if you like to send an e-mail, do not hesitate to contact!" %}{% endblock %}
+{% block canonical-url %}https://individualsymphony.com/{{ LANGUAGE_CODE }}/contact{% endblock %}
+{% block og-url %}https://individualsymphony.com/{{ LANGUAGE_CODE }}/contact{% endblock %}
+{% block twitter-title %}{% trans "Contact - Individual Symphony" %}{% endblock %}
+{% block twitter-desc %}{% trans "You can find me on GitHub and LinkedIn, also if you like to send an e-mail, do not hesitate to contact!" %}{% endblock %}
+{% block title %}{% trans "Contact - Individual Symphony" %}{% endblock %}
+{% block h1 %}<h1>{% trans "Contact" %}</h1>{% endblock %}
+{% block description %}
+<div class="card-panel">
+{% blocktrans %}
+<p>You can find me on 
+<a href="https://github.com/0x01h" target="_blank">GitHub <i class="fab fa-github"></i></a> and <a href="https://linkedin.com/in/orçunözdemir" target="_blank">LinkedIn <i class="fab fa-linkedin"></i></a>, also if you like to send an e-mail, do not hesitate to <strong>contact!</strong></p>
+{% endblocktrans %}
+{% endblock %}
+{% block content %}
+<code><i class="fas fa-envelope-square"></i> benorcunozdemir <i class="fas fa-at"></i> gmail <i class="fas fa-dot-circle"></i> com</code>
+</div>
+{% endblock %}

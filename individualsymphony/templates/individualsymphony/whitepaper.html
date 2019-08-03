@@ -1,0 +1,23 @@
+{% extends "individualsymphony/base.html" %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% block og-title %}{% trans "Whitepaper - Individual Symphony" %}{% endblock %}
+{% block desc %}{% trans "This project is planned to be presented as graduation thesis in Istanbul Technical University in 2019. Final paper and source code will be available in June, 2019." %}{% endblock %}
+{% block og-desc %}{% trans "This project is planned to be presented as graduation thesis in Istanbul Technical University in 2019. Final paper and source code will be available in June, 2019." %}{% endblock %}
+{% block canonical-url %}https://individualsymphony.com/{{ LANGUAGE_CODE }}/whitepaper{% endblock %}
+{% block og-url %}https://individualsymphony.com/{{ LANGUAGE_CODE }}/whitepaper{% endblock %}
+{% block twitter-title %}{% trans "Whitepaper - Individual Symphony" %}{% endblock %}
+{% block twitter-desc %}{% trans "This project is planned to be presented as graduation thesis in Istanbul Technical University in 2019. Final paper and source code will be available in June, 2019." %}{% endblock %}
+{% block title %}{% trans "Whitepaper - Individual Symphony" %}{% endblock %}
+{% block h1 %}<h1>{% trans "Whitepaper" %}</h1>{% endblock %}
+{% block description %}
+{% trans "<p>This project is planned to be presented as graduation thesis in Istanbul Technical University in 2019.</p>" %}
+{% endblock %}
+{% block content %}
+{% blocktrans %}
+    <p>Final paper and source code will be available in June, 2019.</p>
+    <p><a href="/static/documents/final_report.pdf">Final Report</a></p>
+    <p><a href="/static/documents/presentation.pdf">Presentation</a></p>
+    <p><a href="https://github.com/0x01h/individual-symphony/">Source Code</a></p>
+{% endblocktrans %}
+{% endblock %}

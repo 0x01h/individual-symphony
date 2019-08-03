@@ -1,0 +1,7 @@
+{% extends "individualsymphony/base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Something Went Wrong! - Individual Symphony" %}{% endblock %}
+{% block h1 %}<h1>{% trans "Something Went Wrong!" %}</h1>{% endblock %}
+{% block description %}
+<img class="responsive-img" title="{% trans "Something Went Wrong!" as sww %}{{ sww }}" alt="{{ sww }}" src="/static/images/something_went_wrong.png">
+{% endblock %}
