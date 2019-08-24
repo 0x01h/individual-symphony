@@ -880,7 +880,7 @@ msgstr ""
 
 #: individualsymphony/templates/individualsymphony/results.html:458
 msgid "Genre Interest Analysis"
-msgstr "Türlü İlgi Analizi"
+msgstr "Tür İlgi Analizi"
 
 #: individualsymphony/templates/individualsymphony/results.html:471
 msgid "Big Five Personality Value"
